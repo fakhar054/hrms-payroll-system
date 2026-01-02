@@ -1,6 +1,14 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Search, Filter, ArrowUpDown, MoreVertical } from "lucide-react";
-import { FiSearch, FiBell, FiMail, FiChevronRight, FiCommand } from "react-icons/fi";
+import {
+  FiSearch,
+  FiBell,
+  FiMail,
+  FiChevronRight,
+  FiCommand,
+} from "react-icons/fi";
+import { useDispatch, useSelector } from "react-redux";
+import { getAllUsers } from "features/users/userThunk";
 
 const EMPLOYEES = [
   {
@@ -31,7 +39,7 @@ const EMPLOYEES = [
     jobRole: "Backend Developer",
     status: "Full Time",
   },
-   {
+  {
     id: "EMP-005",
     name: "Sophia Turner",
     email: "sophia.turner@hotmail.com",
@@ -39,35 +47,35 @@ const EMPLOYEES = [
     status: "Contract",
   },
   {
-    id: "EMP-006",
+    id: "EMP-0061",
     name: "Liam Johnson",
     email: "liam.johnson@yahoo.com",
     jobRole: "UX Researcher",
     status: "Part Time",
   },
   {
-    id: "EMP-006",
+    id: "EMP-007",
     name: "Liam Johnson",
     email: "liam.johnson@yahoo.com",
     jobRole: "UX Researcher",
     status: "Part Time",
   },
   {
-    id: "EMP-006",
+    id: "EMP-061",
     name: "Liam Johnson",
     email: "liam.johnson@yahoo.com",
     jobRole: "UX Researcher",
     status: "Part Time",
   },
   {
-    id: "EMP-006",
+    id: "EMP-016",
     name: "Liam Johnson",
     email: "liam.johnson@yahoo.com",
     jobRole: "UX Researcher",
     status: "Part Time",
   },
   {
-    id: "EMP-006",
+    id: "EMP-026",
     name: "Liam Johnson",
     email: "liam.johnson@yahoo.com",
     jobRole: "UX Researcher",
@@ -78,9 +86,23 @@ const EMPLOYEES = [
 export default function EmployeeList() {
   const [search, setSearch] = useState("");
 
+  const dispatch = useDispatch();
+  const { users, loading, error } = useSelector((state) => state.users);
+
+  useEffect(() => {
+    const fetchUsers = async () => {
+      const resultAction = await dispatch(getAllUsers());
+    };
+    fetchUsers();
+  }, [dispatch]);
+
+  useEffect(() => {
+    console.log("All users:", users);
+  }, [users]);
+
   return (
     <div className="w-full min-h-screen bg-white p-4 md:p-4">
-        <div className="flex flex-col ">
+      <div className="flex flex-col ">
         <h1 className="text-[30px] md:text-[2.5vw] font-clash-bold text-black leading-none ">
           Hello <span className="text-orange-600">Shahzaib</span>
         </h1>
@@ -91,28 +113,24 @@ export default function EmployeeList() {
       <div className="max-w-7xl mx-auto bg-white rounded-2xl shadow-sm p-6 border border-neutral-200 mt-[2vw]">
         {/* HEADER */}
         <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4 mb-6">
-          <h1 className="text-2xl text-gray-800 font-clash-bold">
-            Employees
-          </h1>
+          <h1 className="text-2xl text-gray-800 font-clash-bold">Employees</h1>
 
           <div className="flex flex-wrap gap-3 font-clash-medium">
             {/* SEARCH */}
-    
+
             <div className="flex items-center gap-2 bg-[#f8f8f8] border border-zinc-200 rounded-xl px-3 py-2  max-w-md">
-                    <FiSearch className="text-black" size={20} />
-                    <input
-                      type="text"
-                      placeholder="Search"
-                      value={search}
-                      onChange={(e) => setSearch(e.target.value)}
-                      className="bg-transparent outline-none text-sm text-black placeholder-black w-full"
-                    />
-                    <div className="flex justify-center items-center">
-                      <FiCommand />
-                      
-                    </div>
-                  </div>
-            
+              <FiSearch className="text-black" size={20} />
+              <input
+                type="text"
+                placeholder="Search"
+                value={search}
+                onChange={(e) => setSearch(e.target.value)}
+                className="bg-transparent outline-none text-sm text-black placeholder-black w-full"
+              />
+              <div className="flex justify-center items-center">
+                <FiCommand />
+              </div>
+            </div>
 
             {/* FILTER (UI ONLY) */}
             <button className="flex items-center gap-2 px-4 py-2 border rounded-lg text-sm text-gray-600 hover:bg-gray-50">
@@ -142,21 +160,23 @@ export default function EmployeeList() {
               </tr>
             </thead>
             <tbody>
-              {EMPLOYEES.map((emp) => (
+              {users.map((emp, index) => (
                 <tr
-                  key={emp.id}
+                  key={emp._id}
                   className="border-b border-neutral-300 text-sm hover:bg-gray-50 transition"
                 >
                   <td className="py-3 px-4 font-medium text-gray-700">
-                    {emp.id}
+                    {emp.id || "EMP-000"}
                   </td>
-                  <td className="py-3 px-4">{emp.name}</td>
+                  <td className="py-3 px-4">{emp.personalInfo.fullName}</td>
                   <td className="py-3 px-4 text-gray-600">
-                    {emp.email}
+                    {emp.personalInfo.email}
                   </td>
-                  <td className="py-3 px-4">{emp.jobRole}</td>
+                  <td className="py-3 px-4">{emp.jobRole || "Not added"}</td>
                   <td className="py-3 px-4">
-                    <StatusBadge status={emp.status} />
+                    <StatusBadge
+                      status={emp.isActive ? "Active" : "Un-Active"}
+                    />
                   </td>
                   <td className="py-3 px-4 text-right">
                     <button className="p-2 rounded-lg hover:bg-gray-100">
@@ -188,9 +208,7 @@ function StatusBadge({ status }) {
 
   return (
     <span
-      className={`px-3 py-1 rounded-full text-xs font-medium ${
-        styles[status]
-      }`}
+      className={`px-3 py-1 rounded-full text-xs font-medium ${styles[status]}`}
     >
       {status}
     </span>

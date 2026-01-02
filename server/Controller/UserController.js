@@ -113,4 +113,21 @@ export const logout = async (req, res) => {
   }
 };
 
+export const getAllusers = async (req, res) => {
+  try {
+    const users = await UserModel.find().select("-password");
+    res.status(200).json({
+      status: true,
+      count: users.length,
+      data: users,
+    });
+  } catch (error) {
+    res.status(500).json({
+      success: false,
+      message: "Failed to fetch users",
+      error: error.message,
+    });
+  }
+};
+
 export const forgotPassword = async (req, res) => {};
