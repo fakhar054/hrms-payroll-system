@@ -1,6 +1,13 @@
 import { MoreVertical } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
+import {
+  FiSearch,
+  FiBell,
+  FiMail,
+  FiChevronRight,
+  FiCommand,
+} from "react-icons/fi";
 
 const LEAVES = [
   {
@@ -40,16 +47,26 @@ const LEAVES = [
 export default function LeavesList() {
   const navigate = useNavigate();
   const [openMenu, setOpenMenu] = useState(null);
+
   useEffect(() => {}, []);
 
   return (
-    <div className="w-full min-h-screen bg-[#F5F5F5] p-4 md:p-8">
-      <div className="max-w-7xl mx-auto bg-white rounded-2xl shadow-sm p-6">
+    <div className="w-full min-h-screen  p-4 md:p-8">
+      <div className="max-w-7xl mx-auto border border-neutral-200 shadow-sm bg-white rounded-2xl shadow-sm p-6">
         {/* HEADER */}
         <div className="flex items-center justify-between mb-6">
-          <h1 className="text-2xl font-semibold text-gray-800">
+          <h1 className="text-2xl font-clash-bold text-gray-800">
             Leave Requests
           </h1>
+          <div className="search_div max-w-md border border-zinc-200  flex items-center px-3 py-2 gap-2 bg-[#f8f8f8] rounded-xl">
+            <FiSearch />
+            <input
+              className="outline-none focus:ring-0"
+              type="text"
+              placeholder="Search"
+            />
+            <FiCommand />
+          </div>
         </div>
 
         {/* TABLE */}

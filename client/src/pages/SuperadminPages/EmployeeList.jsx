@@ -10,79 +10,6 @@ import {
 import { useDispatch, useSelector } from "react-redux";
 import { getAllUsers } from "features/users/userThunk";
 
-const EMPLOYEES = [
-  {
-    id: "EMP-001",
-    name: "Emma Stone",
-    email: "emma.stone@gmail.com",
-    jobRole: "Product Manager",
-    status: "Full Time",
-  },
-  {
-    id: "EMP-002",
-    name: "Liam Johnson",
-    email: "liam.johnson@yahoo.com",
-    jobRole: "UX Researcher",
-    status: "Part Time",
-  },
-  {
-    id: "EMP-003",
-    name: "Sophia Turner",
-    email: "sophia.turner@hotmail.com",
-    jobRole: "Frontend Developer",
-    status: "Contract",
-  },
-  {
-    id: "EMP-004",
-    name: "Michael Brown",
-    email: "michael.brown@gmail.com",
-    jobRole: "Backend Developer",
-    status: "Full Time",
-  },
-  {
-    id: "EMP-005",
-    name: "Sophia Turner",
-    email: "sophia.turner@hotmail.com",
-    jobRole: "Frontend Developer",
-    status: "Contract",
-  },
-  {
-    id: "EMP-0061",
-    name: "Liam Johnson",
-    email: "liam.johnson@yahoo.com",
-    jobRole: "UX Researcher",
-    status: "Part Time",
-  },
-  {
-    id: "EMP-007",
-    name: "Liam Johnson",
-    email: "liam.johnson@yahoo.com",
-    jobRole: "UX Researcher",
-    status: "Part Time",
-  },
-  {
-    id: "EMP-061",
-    name: "Liam Johnson",
-    email: "liam.johnson@yahoo.com",
-    jobRole: "UX Researcher",
-    status: "Part Time",
-  },
-  {
-    id: "EMP-016",
-    name: "Liam Johnson",
-    email: "liam.johnson@yahoo.com",
-    jobRole: "UX Researcher",
-    status: "Part Time",
-  },
-  {
-    id: "EMP-026",
-    name: "Liam Johnson",
-    email: "liam.johnson@yahoo.com",
-    jobRole: "UX Researcher",
-    status: "Part Time",
-  },
-];
-
 export default function EmployeeList() {
   const [search, setSearch] = useState("");
 
@@ -96,9 +23,9 @@ export default function EmployeeList() {
     fetchUsers();
   }, [dispatch]);
 
-  useEffect(() => {
-    console.log("All users:", users);
-  }, [users]);
+  // useEffect(() => {
+  //   console.log("All users:", users);
+  // }, [users]);
 
   return (
     <div className="w-full min-h-screen bg-white p-4 md:p-4">
