@@ -1,0 +1,261 @@
+import React, { useState } from "react";
+
+function AddEmployee() {
+  const [showPassword, setShowPassword] = useState(false);
+
+  const [formData, setFormData] = useState({
+    name: "",
+    email: "",
+    password: "",
+    employeeId: "",
+    dob: "",
+    jobRole: "",
+    department: "",
+    salary: "",
+    designation: "",
+  });
+
+  const [errors, setErrors] = useState({});
+
+  // Handle input changes
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setFormData({ ...formData, [name]: value });
+    setErrors({ ...errors, [name]: "" });
+  };
+
+  // Validation
+  const validateForm = () => {
+    let newErrors = {};
+
+    if (!formData.name.trim()) newErrors.name = "Name is required";
+
+    if (!formData.email.trim()) {
+      newErrors.email = "Email is required";
+    } else if (!/^\S+@\S+\.\S+$/.test(formData.email)) {
+      newErrors.email = "Enter a valid email";
+    }
+
+    if (!formData.password.trim()) {
+      newErrors.password = "Password is required";
+    } else if (formData.password.length < 4) {
+      newErrors.password = "Password must be at least 4 characters";
+    }
+
+    if (!formData.employeeId.trim())
+      newErrors.employeeId = "Employee ID is required";
+
+    if (!formData.dob) newErrors.dob = "Date of Birth is required";
+    if (!formData.jobRole.trim()) newErrors.jobRole = "Job Role is required";
+    if (!formData.department) newErrors.department = "Department is required";
+    if (!formData.salary) newErrors.salary = "Salary is required";
+    if (!formData.designation)
+      newErrors.designation = "Designation is required";
+
+    setErrors(newErrors);
+    return Object.keys(newErrors).length === 0;
+  };
+
+  // Handle form submit (demo/hardcoded)
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    if (!validateForm()) return;
+
+    // Show alert with hardcoded/demo behavior
+    alert(
+      `Employee Added!\n\nName: ${formData.name}\nEmail: ${formData.email}\nEmployee ID: ${formData.employeeId}\nDepartment: ${formData.department}`
+    );
+
+    // Reset form
+    setFormData({
+      name: "",
+      email: "",
+      password: "",
+      employeeId: "",
+      dob: "",
+      jobRole: "",
+      department: "",
+      salary: "",
+      designation: "",
+    });
+  };
+
+  return (
+    <div className="w-full flex flex-col items-center">
+      <form
+        onSubmit={handleSubmit}
+        className="w-full mt-10 space-y-5 font-switzer text-white"
+      >
+        {/* NAME + EMAIL */}
+        <div className="grid grid-cols-2 gap-4">
+          <div>
+            <label className="text-sm">Full Name</label>
+            <input
+              type="text"
+              name="name"
+              value={formData.name}
+              onChange={handleChange}
+              placeholder="eg: John "
+              className="w-full mt-1 p-3 rounded-lg bg-[#1a1a1a] placeholder-gray-400 text-sm outline-none"
+            />
+            {errors.name && (
+              <p className="text-red-400 text-xs mt-1">{errors.name}</p>
+            )}
+          </div>
+          <div>
+            <label className="text-sm">Email</label>
+            <input
+              type="email"
+              name="email"
+              value={formData.email}
+              onChange={handleChange}
+              placeholder="abc@gmail.com"
+              className="w-full mt-1 p-3 rounded-lg bg-[#1a1a1a] placeholder-gray-400 text-sm outline-none"
+            />
+            {errors.email && (
+              <p className="text-red-400 text-xs mt-1">{errors.email}</p>
+            )}
+          </div>
+        </div>
+
+        {/* EMPLOYEE ID */}
+        <div>
+          <label className="text-sm">Employee ID</label>
+          <input
+            type="text"
+            name="employeeId"
+            value={formData.employeeId}
+            onChange={handleChange}
+            placeholder="EMP-001"
+            className="w-full mt-1 p-3 rounded-lg bg-[#1a1a1a] placeholder-gray-400 text-sm outline-none"
+          />
+          {errors.employeeId && (
+            <p className="text-red-400 text-xs mt-1">{errors.employeeId}</p>
+          )}
+        </div>
+
+        {/* PASSWORD */}
+        <div>
+          <label className="text-sm">Password</label>
+          <div className="relative">
+            <input
+              type={showPassword ? "text" : "password"}
+              name="password"
+              value={formData.password}
+              onChange={handleChange}
+              placeholder="Enter password"
+              className="w-full mt-1 p-3 rounded-lg bg-[#1a1a1a] placeholder-gray-400 text-sm outline-none pr-10"
+            />
+            <span
+              className="absolute right-3 top-4 cursor-pointer text-gray-400"
+              onClick={() => setShowPassword(!showPassword)}
+            >
+              {showPassword ? "🙈" : "👁️"}
+            </span>
+          </div>
+          {errors.password && (
+            <p className="text-red-400 text-xs mt-1">{errors.password}</p>
+          )}
+        </div>
+
+        {/* DOB + JOB ROLE */}
+        <div className="grid grid-cols-2 gap-4">
+          <div>
+            <label className="text-sm">Date of Birth</label>
+            <input
+              type="date"
+              name="dob"
+              value={formData.dob}
+              onChange={handleChange}
+              className="w-full mt-1 p-3 rounded-lg bg-[#1a1a1a] text-sm outline-none"
+            />
+            {errors.dob && (
+              <p className="text-red-400 text-xs mt-1">{errors.dob}</p>
+            )}
+          </div>
+
+          <div>
+            <label className="text-sm">Job Role</label>
+            <input
+              type="text"
+              name="jobRole"
+              value={formData.jobRole}
+              onChange={handleChange}
+              placeholder="Software Engineer"
+              className="w-full mt-1 p-3 rounded-lg bg-[#1a1a1a] placeholder-gray-400 text-sm outline-none"
+            />
+            {errors.jobRole && (
+              <p className="text-red-400 text-xs mt-1">{errors.jobRole}</p>
+            )}
+          </div>
+        </div>
+
+        {/* DEPARTMENT + SALARY */}
+        <div className="grid grid-cols-2 gap-4">
+          <div>
+            <label className="text-sm">Department</label>
+            <select
+              name="department"
+              value={formData.department}
+              onChange={handleChange}
+              className="w-full mt-1 p-3 rounded-lg bg-[#1a1a1a] text-sm outline-none"
+            >
+              <option value="">Select Department</option>
+              <option value="Engineering">Engineering</option>
+              <option value="HR">HR</option>
+              <option value="Finance">Finance</option>
+              <option value="Marketing">Marketing</option>
+              <option value="Tech">Tech</option>
+            </select>
+            {errors.department && (
+              <p className="text-red-400 text-xs mt-1">{errors.department}</p>
+            )}
+          </div>
+
+          <div>
+            <label className="text-sm">Salary</label>
+            <input
+              type="number"
+              name="salary"
+              value={formData.salary}
+              onChange={handleChange}
+              placeholder="50000"
+              className="w-full mt-1 p-3 rounded-lg bg-[#1a1a1a] placeholder-gray-400 text-sm outline-none"
+            />
+            {errors.salary && (
+              <p className="text-red-400 text-xs mt-1">{errors.salary}</p>
+            )}
+          </div>
+        </div>
+
+        {/* DESIGNATION */}
+        <div>
+          <label className="text-sm">Designation</label>
+          <select
+            name="designation"
+            value={formData.designation}
+            onChange={handleChange}
+            className="w-full mt-1 p-3 rounded-lg bg-[#1a1a1a] text-sm outline-none"
+          >
+            <option value="">Select Designation</option>
+            <option value="admin">Admin</option>
+            <option value="user">User</option>
+          </select>
+          {errors.designation && (
+            <p className="text-red-400 text-xs mt-1">{errors.designation}</p>
+          )}
+        </div>
+
+        {/* SUBMIT */}
+        <button
+          type="submit"
+          className="w-full py-3 bg-white text-black rounded-lg font-medium hover:bg-gray-200 transition"
+        >
+          Add Employee
+        </button>
+      </form>
+    </div>
+  );
+}
+
+export default AddEmployee;

@@ -1,0 +1,115 @@
+
+
+/* -----------------------------Font----------------------------- */
+
+@font-face {
+  font-family: wix2;
+  src: url(/fonts/wix2.ttf);
+}
+
+@font-face {
+  font-family: wix;
+  src: url(/fonts/wix.ttf);
+}
+@font-face {
+  font-family: switzer;
+  src: url('/fonts/switzer.ttf');
+}
+
+@font-face {
+  font-family: switzer2;
+  src: url('/fonts/switzer2.ttf');
+}
+@font-face {
+  font-family: clash-display-bold;
+  src: url('/fonts/ClashDisplay-Bold.ttf');
+}
+@font-face {
+  font-family: clash-display-light;
+  src: url('/fonts/ClashDisplay-Light.ttf');
+}
+@font-face {
+  font-family: clash-display-medium;
+  src: url('/fonts/ClashDisplay-Medium.ttf');
+}
+@font-face {
+  font-family: clash-display-regular;
+  src: url('\fonts\ClashDisplay-Regular.ttf');
+}
+@font-face {
+  font-family: clash-display-semibold;
+  src: url('/fonts/ClashDisplay-Semibold.ttf');
+}
+
+
+
+/* -----------------------------Font----------------------------- */
+
+
+
+@import "tailwindcss";
+
+
+@theme{
+    --font-wix2 : wix2, "san-serif";
+    --font-wix : wix, "san-serif";
+    --font-switzer : switzer, "san-serif";
+    --font-clash-bold: clash-display-bold, "san-serif";
+    --font-clash-semibold: clash-display-semibold, "san-serif";
+    --font-clash-medium: clash-display-medium, "san-serif";
+    --font-clash-regular: clash-display-regular, "san-serif";
+    --font-clash-light: clash-display-light, "san-serif";
+   
+
+
+    
+    
+  }
+
+
+
+
+  
+  
+  /* -----------------------------Colors----------------------------- */
+
+
+@layer base {
+  :root {
+    --color-primary: #9b59b6;       /* purple */
+    --color-dark: #262626 ;        /* black */
+    --color-light: #ffffff;           /* white */
+    --color-light-gray:#EEEEEE;
+    
+  }
+
+  .dark {
+     --color-primary: #9b59b6;       /* purple */
+    --color-dark: #262626 ;        /* black */
+    --color-light: #ffffff;           /* white */
+
+
+  }
+
+  /* Optional: smooth color transition */
+  * {
+    @apply transition-colors duration-300;
+  }
+}
+
+
+
+input[type=number]::-webkit-outer-spin-button,
+input[type=number]::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+input[type=number] {
+  -moz-appearance: textfield;
+}
+
+
+
+
+  /* -----------------------------Colors----------------------------- */
