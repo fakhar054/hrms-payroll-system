@@ -131,7 +131,7 @@ export default function Step1({ formData, handleChange, nextStep, errors }) {
         <div>
           <label
             className="block text-sm font-medium mb-1"
-            htmlFor="currentAdrees"
+            htmlFor="currentAddress"
           >
             Current Address
           </label>
@@ -151,6 +151,26 @@ export default function Step1({ formData, handleChange, nextStep, errors }) {
         <div>
           <label
             className="block text-sm font-medium mb-1"
+            htmlFor="address"
+          >
+            Current Address
+          </label>
+          <input
+            type="text"
+            name="address"
+            id="address"
+            onChange={handleChange}
+            placeholder="Current Adress"
+            value={formData.address}
+            className={`${feildStyle}`}
+          />
+          {errors.address && (
+            <p className="text-red-500 text-xs mt-1">{errors.address}</p>
+          )}
+        </div>
+        <div>
+          <label
+            className="block text-sm font-medium mb-1"
             htmlFor="permanentAddress"
           >
             Permanent Address
@@ -160,11 +180,12 @@ export default function Step1({ formData, handleChange, nextStep, errors }) {
             name="permanentAddress"
             id="permanentAddress"
             placeholder="Permanent Adress"
+            value={formData.permanentAddress}
             onChange={handleChange}
             className={`${feildStyle}`}
           />
-          {errors.empId && (
-            <p className="text-red-500 text-xs mt-1">{errors.empId}</p>
+          {errors.permanentAddress && (
+            <p className="text-red-500 text-xs mt-1">{errors.permanentAddress}</p>
           )}
         </div>
 
@@ -180,6 +201,9 @@ export default function Step1({ formData, handleChange, nextStep, errors }) {
             value={formData.dob}
             className={`${feildStyle}`}
           />
+           {errors.dob && (
+            <p className="text-red-500 text-xs mt-1">{errors.dob}</p>
+          )}
         </div>
 
         <div>
@@ -195,6 +219,9 @@ export default function Step1({ formData, handleChange, nextStep, errors }) {
             value={formData.phone}
             className={`${feildStyle}`}
           />
+          {errors.phone && (
+            <p className="text-red-500 text-xs mt-1">{errors.phone}</p>
+          )}
         </div>
         <div>
           <label
@@ -211,6 +238,9 @@ export default function Step1({ formData, handleChange, nextStep, errors }) {
             value={formData.dateOfJoining}
             className={`${feildStyle}`}
           />
+          {errors.dateOfJoining && (
+            <p className="text-red-500 text-xs mt-1">{errors.dateOfJoining}</p>
+          )}
         </div>
 
         
@@ -218,21 +248,26 @@ export default function Step1({ formData, handleChange, nextStep, errors }) {
         <div>
           <label
             className="block text-sm font-medium mb-1"
-            htmlFor="matarial_status"
+            htmlFor="matarialStatus"
           >
             Matarial Status
           </label>
           <select
-            name="matarial_status"
-            id="matarial_status"
+            name="maritalStatus"
+            id="maritalStatus"
             onChange={handleChange}
             value={formData.maritalStatus}
             className={`${feildStyle}`}
           >
-            <option>Single</option>
-            <option>Married</option>
-            <option>Widow</option>
+            <option value="">Select marital status</option>
+            <option value="single">Single</option>
+            <option value="married">Married</option>
+            <option value="widow">Widow</option>
           </select>
+          {errors.maritalStatus && (
+  <p className="text-red-500 text-xs mt-1">{errors.maritalStatus}</p>
+)}
+          
         </div>
         <div>
           <label className="block text-sm font-medium mb-1" htmlFor="religion">
@@ -245,10 +280,14 @@ export default function Step1({ formData, handleChange, nextStep, errors }) {
             value={formData.religion}
             className={`${feildStyle}`}
           >
-            <option value="">Select Religion</option>
-            <option value="muslim">Islam</option>
-            <option value="non-muslim">other</option>
+            <option >Select Religion</option>
+            <option value="islam">Islam</option>
+            <option value="other">other</option>
           </select>
+          {errors.religion && (
+            <p className="text-red-500 text-xs mt-1">{errors.religion}</p>
+          )}
+          
         </div>
         <div>
           <label className="block text-sm font-medium mb-1" htmlFor="education">
@@ -263,6 +302,9 @@ export default function Step1({ formData, handleChange, nextStep, errors }) {
             value={formData.education}
             className={`${feildStyle}`}
           />
+          {errors.education && (
+            <p className="text-red-500 text-xs mt-1">{errors.education}</p>
+          )}
         </div>
         <div>
           <label
@@ -275,11 +317,14 @@ export default function Step1({ formData, handleChange, nextStep, errors }) {
             type="text"
             name="workExperience"
             id="workExperience"
-            placeholder="2 Years"
+            placeholder="2"
             onChange={handleChange}
             value={formData.workExperience}
             className={`${feildStyle}`}
           />
+          {errors.workExperience && (
+            <p className="text-red-500 text-xs mt-1">{errors.workExperience}</p>
+          )}
         </div>
         
       </div>
@@ -304,6 +349,7 @@ export default function Step1({ formData, handleChange, nextStep, errors }) {
     </div>
   );
 }   
+
 
 
 
