@@ -8,7 +8,7 @@ export const loginApi = (data) =>
   });
 
 export const registerApi = (data) =>
-  axios.post(`${BASE_URL}/register`, data, {
+  axios.post(`${BASE_URL}/api/register`, data, {
     withCredentials: true,
   });
 
