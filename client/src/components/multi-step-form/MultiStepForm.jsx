@@ -1,9 +1,3 @@
-
-
-
-
-
-
 import React, { useState } from "react";
 import Step1 from "./Step1";
 import Step2 from "./Step2";
@@ -68,72 +62,53 @@ export default function MultiStepForm() {
   const validateStep = (currentStep) => {
     let newErrors = {};
 
-   
-     if (currentStep === 1) {
-  if (!formData.fullName)
-    newErrors.fullName = "Full name is required";
-  else if (!onlyText.test(formData.fullName))
-    newErrors.fullName = "Only alphabets allowed";
+    if (currentStep === 1) {
+      if (!formData.fullName) newErrors.fullName = "Full name is required";
+      else if (!onlyText.test(formData.fullName))
+        newErrors.fullName = "Only alphabets allowed";
 
-  if (!formData.fatherName)
-    newErrors.fatherName = "Father name is required";
-  else if (!onlyText.test(formData.fatherName))
-    newErrors.fatherName = "Only alphabets allowed";
+      if (!formData.fatherName)
+        newErrors.fatherName = "Father name is required";
+      else if (!onlyText.test(formData.fatherName))
+        newErrors.fatherName = "Only alphabets allowed";
 
-  if (!formData.cnic)
-    newErrors.cnic = "CNIC is required";
-  else if (!onlyNumber.test(formData.cnic) || formData.cnic.length < 10)
-    newErrors.cnic = "CNIC must be at least 10 digits";
+      if (!formData.cnic) newErrors.cnic = "CNIC is required";
+      else if (!onlyNumber.test(formData.cnic) || formData.cnic.length < 10)
+        newErrors.cnic = "CNIC must be at least 10 digits";
 
-  if (!formData.empId)
-    newErrors.empId = "Employee ID is required";
+      if (!formData.empId) newErrors.empId = "Employee ID is required";
 
-  if (!formData.email)
-    newErrors.email = "Email is required";
-  else if (!emailRegex.test(formData.email))
-    newErrors.email = "Invalid email format";
+      if (!formData.email) newErrors.email = "Email is required";
+      else if (!emailRegex.test(formData.email))
+        newErrors.email = "Invalid email format";
 
-  if (!formData.password)
-    newErrors.password = "Password is required";
-  else if (!passwordRegex.test(formData.password))
-    newErrors.password = "Min 8 chars, letters + numbers";
+      if (!formData.password) newErrors.password = "Password is required";
+      else if (!passwordRegex.test(formData.password))
+        newErrors.password = "Min 8 chars, letters + numbers";
 
-  
+      if (!formData.currentAddress) newErrors.currentAddress = "Required";
 
-  
+      if (!formData.permanentAddress) newErrors.permanentAddress = "Required";
 
-  if (!formData.currentAddress)
-    newErrors.currentAddress = "Required";
+      if (!formData.dob) newErrors.dob = "Required";
 
-  if (!formData.permanentAddress)
-    newErrors.permanentAddress = "Required";
+      if (!formData.phone) newErrors.phone = "Phone is required";
+      else if (!onlyNumber.test(formData.phone) || formData.phone.length < 10)
+        newErrors.phone = "Invalid phone number";
 
-  if (!formData.dob)
-    newErrors.dob = "Required";
+      if (!formData.dateOfJoining) newErrors.dateOfJoining = "Required";
 
-  if (!formData.phone)
-    newErrors.phone = "Phone is required";
-  else if (!onlyNumber.test(formData.phone) || formData.phone.length < 10)
-    newErrors.phone = "Invalid phone number";
+      if (!formData.maritalStatus) newErrors.maritalStatus = "Required";
 
-  if (!formData.dateOfJoining)
-    newErrors.dateOfJoining = "Required";
+      if (!formData.education) newErrors.education = "Required";
 
-  if (!formData.maritalStatus)
-    newErrors.maritalStatus = "Required";
+      if (!formData.religion) newErrors.religion = "Required";
 
-  if (!formData.education)
-    newErrors.education = "Required";
+      //   if (formData.workExperience && !onlyNumber.test(formData.workExperience))
+      //     // newErrors.workExperience = "Numbers only ";
 
-  if (!formData.religion)
-    newErrors.religion = "Required";
-
-  if (formData.workExperience && !onlyNumber.test(formData.workExperience))
-    newErrors.workExperience = "Numbers only";
-
-  console.log("STEP 1 ERRORS:", newErrors);
-}
-    
+      //   // console.log("STEP 1 ERRORS:", newErrors);
+    }
 
     if (currentStep === 2) {
       if (!formData.department) newErrors.department = "Required";
@@ -169,15 +144,15 @@ export default function MultiStepForm() {
   };
 
   const nextStep = () => {
-  const isValid = validateStep(step);
+    const isValid = validateStep(step);
 
-  if (!isValid) {
-    console.log("Validation failed for step:", step);
-    return;
-  }
+    if (!isValid) {
+      console.log("Validation failed for step:", step);
+      return;
+    }
 
-  setStep((prev) => prev + 1);
-};
+    setStep((prev) => prev + 1);
+  };
   const prevStep = () => setStep(step - 1);
 
   const handleChange = (e) => {
@@ -186,27 +161,56 @@ export default function MultiStepForm() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-     try {
-    const res = await dispatch(registerUser(formData)).unwrap();
+    try {
+      const res = await dispatch(registerUser(formData)).unwrap();
 
-    console.log("Registered user:", res);
+      console.log("Registered user:", res);
 
-    // Example: redirect
-    navigate("/admin"); // or "/login"
-
-  } catch (err) {
-    console.error("Registration failed:", err);
-  }
+      // Example: redirect
+      navigate("/admin"); // or "/login"
+    } catch (err) {
+      console.error("Registration failed:", err);
+    }
   };
 
   return (
     <form onSubmit={handleSubmit}>
       <ProgressBar currentStep={step} />
 
-      {step === 1 && <Step1 formData={formData} handleChange={handleChange} nextStep={nextStep} errors={errors} />}
-      {step === 2 && <Step2 formData={formData} handleChange={handleChange} nextStep={nextStep} prevStep={prevStep} errors={errors} />}
-      {step === 3 && <Step3 formData={formData} handleChange={handleChange} nextStep={nextStep} prevStep={prevStep} errors={errors} />}
-      {step === 4 && <Step4 formData={formData} handleChange={handleChange} prevStep={prevStep} errors={errors} />}
+      {step === 1 && (
+        <Step1
+          formData={formData}
+          handleChange={handleChange}
+          nextStep={nextStep}
+          errors={errors}
+        />
+      )}
+      {step === 2 && (
+        <Step2
+          formData={formData}
+          handleChange={handleChange}
+          nextStep={nextStep}
+          prevStep={prevStep}
+          errors={errors}
+        />
+      )}
+      {step === 3 && (
+        <Step3
+          formData={formData}
+          handleChange={handleChange}
+          nextStep={nextStep}
+          prevStep={prevStep}
+          errors={errors}
+        />
+      )}
+      {step === 4 && (
+        <Step4
+          formData={formData}
+          handleChange={handleChange}
+          prevStep={prevStep}
+          errors={errors}
+        />
+      )}
     </form>
   );
 }
