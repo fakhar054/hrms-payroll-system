@@ -18,7 +18,6 @@ export const registerUser = async (req, res) => {
         gender: data.gender,
         phone: data.phone,
         email: data.email,
-        address: data.address,
         currentAddress: data.currentAddress,
         permanentAddress: data.permanentAddress,
         dateOfJoining: data.dateOfJoining,
@@ -26,6 +25,7 @@ export const registerUser = async (req, res) => {
         religion: data.religion,
         education: data.education,
         workExperience: data.workExperience,
+        empId: data.empId,
       },
 
       bankInfo: {
