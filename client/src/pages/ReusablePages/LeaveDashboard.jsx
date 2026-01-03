@@ -1,32 +1,8 @@
 import React, { useEffect, useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { fetchMyLeaves, fetchAllLeaves, applyLeave, updateLeaveStatus, resetLeaveState } from 'features/employees/leaveSlice';
+
 
 const LeaveDashboard = () => {
-  const dispatch = useDispatch();
-  const { user } = useSelector((state) => state.auth); // Assuming you have auth state
-  const { list: leaves, loading, success, error } = useSelector((state) => state.leaves);
-
-  const isAdmin = user?.role === 'admin';
-  const [formData, setFormData] = useState({ reason: '', fromDate: '', toDate: '' });
-
-  useEffect(() => {
-    isAdmin ? dispatch(fetchAllLeaves()) : dispatch(fetchMyLeaves());
-  }, [dispatch, isAdmin]);
-
-  useEffect(() => {
-    if (success) {
-      alert("Leave Applied Successfully!");
-      setFormData({ reason: '', fromDate: '', toDate: '' });
-      dispatch(resetLeaveState());
-    }
-  }, [success, dispatch]);
-
-
-  const handleAction = (id, status) => {
-    const adminComment = prompt("Enter admin comment (optional):");
-    dispatch(updateLeaveStatus({ id, status, adminComment }));
-  };
+  
 
   return (
     <div className="p-8 bg-black min-h-screen text-white">
@@ -88,7 +64,7 @@ const LeaveDashboard = () => {
             </table>
             {loading && <p className="p-10 text-center animate-pulse">Loading data...</p>}
             {!loading && leaves.length === 0 && <p className="p-10 text-center text-gray-500">No leaves found.</p>}
-          </div>
+          </div> 
         </div>
       
     
