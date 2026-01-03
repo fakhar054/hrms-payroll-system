@@ -154,4 +154,37 @@ export const deletUser = async (req, res) => {
   }
 };
 
+export const updateUserByAdmin = async (req, res) => {
+  try {
+    const userId = req.params.id;
+    console.log("user id: ", userId);
+
+    const protectedFields = [
+      "_id",
+      "password",
+      "createdAt",
+      "updatedAt",
+      "__v",
+    ];
+
+    protectedFields.forEach((field) => delete req.body[field]);
+
+    const updatedUser = await UserModel.findByIdAndUpdate(
+      userId,
+      { $set: req.body },
+      { new: true }
+    );
+
+    if (!updatedUser)
+      return res.status(404).json({ message: "User not found" });
+
+    return res.status(200).json({
+      message: "User updated successfully",
+      user: updatedUser,
+    });
+  } catch (error) {
+    return res.status(500).json({ message: error.message });
+  }
+};
+
 export const forgotPassword = async (req, res) => {};
