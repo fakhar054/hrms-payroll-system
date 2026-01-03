@@ -29,7 +29,6 @@ export default function MultiStepForm() {
     empId: "",
     email: "",
     password: "",
-    address:"",
     currentAddress: "",
     permanentAddress: "",
     dob: "",
@@ -101,8 +100,7 @@ export default function MultiStepForm() {
 
   
 
-  if (!formData.currentAddress)
-    newErrors.address = "Required";
+  
 
   if (!formData.currentAddress)
     newErrors.currentAddress = "Required";

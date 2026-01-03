@@ -9,6 +9,9 @@ const UserModel = new mongoose.Schema(
         required: true,
         trim: true,
       },
+      empId: {
+        type: String,
+      },
       fatherName: String,
       cnic: {
         type: String,
@@ -25,17 +28,14 @@ const UserModel = new mongoose.Schema(
         required: true,
         unique: true,
       },
-      address: String,
       currentAddress: String,
       permanentAddress: String,
       dateOfJoining: Date,
       maritalStatus: {
         type: String,
-        default: "Single",
       },
       religion: {
         type: String,
-        default: "Muslim",
       },
       education: String,
       workExperience: String,

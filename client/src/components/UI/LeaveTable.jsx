@@ -8,6 +8,7 @@ import {
   FiChevronRight,
   FiCommand,
 } from "react-icons/fi";
+import axios from "axios";
 
 const LEAVES = [
   {
@@ -47,6 +48,23 @@ const LEAVES = [
 export default function LeavesList() {
   const navigate = useNavigate();
   const [openMenu, setOpenMenu] = useState(null);
+
+  // const BASE_URL = import.meta.env.VITE_API_URL;
+
+  // const fetchLeaves = async () => {
+  //   try {
+  //     const response = await axios.get(
+  //       `${BASE_URL}/api/leave/admin/all-leaves`,
+  //       {
+  //         withCredentials: true,
+  //       }
+  //     );
+  //     return response.data;
+  //   } catch (error) {
+  //     console.error("Error fetching leaves:", error);
+  //     throw error;
+  //   }
+  // };
 
   useEffect(() => {}, []);
 
