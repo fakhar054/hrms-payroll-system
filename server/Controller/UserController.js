@@ -25,6 +25,7 @@ export const registerUser = async (req, res) => {
         religion: data.religion,
         education: data.education,
         workExperience: data.workExperience,
+        empId: data.empId,
       },
 
       bankInfo: {

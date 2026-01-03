@@ -20,7 +20,7 @@ function Login() {
       navigate("/admin");
     } else if (user.userType === "super-admin") {
       navigate("/admin");
-    } else if (user.userType === "user") {
+    } else if (user.userType === "employee") {
       navigate("/dashboard");
     }
   }, [user, navigate]);
