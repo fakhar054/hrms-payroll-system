@@ -6,6 +6,7 @@ import {
   getMe,
   getAllusers,
   deletUser,
+  updateUserByAdmin,
 } from "../Controller/UserController.js";
 import getMeMiddleware from "../Middlewares/getMeMiddleware.js";
 
@@ -18,5 +19,6 @@ router.get("/logout", logout);
 
 router.get("/all-users", getAllusers);
 router.patch("/admin/user/:id/deactivate", deletUser);
+router.patch("/admin/update-users/:id", updateUserByAdmin);
 
 export default router;
