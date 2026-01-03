@@ -12,8 +12,9 @@ import {
   ResponsiveContainer,
   CartesianGrid,
 } from "recharts";
+import PageHeader from "components/UI/PageHeader";
 
-function Demo() {
+function AdminHome() {
   // 🔒 Hardcoded data
   const user = {
     name: "Admin User",
@@ -41,14 +42,7 @@ function Demo() {
 
   return (
     <div className="w-full h-full bg-white p-4">
-      <div className="flex flex-col">
-        <h1 className="text-[30px] md:text-[2.5vw] font-clash-bold text-black leading-none">
-          Hello <span className="text-orange-600">{user.name}</span>
-        </h1>
-        <p className="font-clash-medium text-gray-700">
-          Hope you're having a <span className="">productive</span> day :)
-        </p>
-      </div>
+     <PageHeader/>
 
       <div className="flex gap-3 pt-[2vw] flex-wrap">
         <div className="p-4 bg-[#EEEEEE] flex flex-col justify-around flex-1 min-w-[250px] min-h-[170px] rounded-3xl space-y-6 transition duration-300 transform hover:scale-[1.03]">
@@ -137,4 +131,4 @@ function Demo() {
   );
 }
 
-export default Demo;
+export default AdminHome;

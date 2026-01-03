@@ -2,9 +2,9 @@ import React from "react";
 import { createBrowserRouter, Outlet } from "react-router-dom";
 
 // Public pages
-import LandingPage from "../pages/LandingPage";
-import SignupPage from "../pages/SignupPage";
-import NotFound from "../pages/NotFound";
+import LandingPage from "../pages/GlobalPages/LandingPage";
+import SignupPage from "../pages/GlobalPages/SignupPage";
+import NotFound from "../pages/GlobalPages/NotFound";
 
 // Layouts
 import AdminDashboardLayout from "../layouts/AdminDashboardLayout";
@@ -12,23 +12,23 @@ import UserDashboardLayout from "../layouts/UserDashboardLayout";
 import SAdminDashboardLayout from "@/layouts/SAdminDashboardLayout";
 
 // Admin pages
-import AdminHome from "../pages/AdminPages/Home";
-import RegisterUser from "../pages/AdminPages/RegisterUser";
-import UserCards from "../pages/AdminPages/UserCards";
-import Leaves from "pages/AdminPages/Leaves";
+import AdminHome from "../pages/AdminPages/AdminHome";
+import UserCards from "../pages/ReusablePages/UserCards";
+import Leaves from "pages/ReusablePages/Leaves";
 
 // superadmin pages
-import UserRegistration from "pages/SuperadminPages/UserRegistration";
-import Demo from "pages/SuperadminPages/Demo";
+import SAdminHome from "pages/SuperadminPages/SAdminHome";
 
 // User pages
 import UserHome from "../pages/UserPages/UserHome";
 import ProtectedRoute from "./ProtectedRoute";
 import MultiStepForm from "components/multi-step-form/MultiStepForm";
-import EmployeeList from "pages/SuperadminPages/EmployeeList";
-import LeaveDetail from "pages/SuperadminPages/LeaveDetail";
+import EmployeeList from "pages/ReusablePages/EmployeeList";
+import LeaveDetail from "pages/ReusablePages/LeaveDetail";
 
 import Root from "../layouts/Root";
+import LeaveDashboard from "pages/ReusablePages/LeaveDashboard";
+import RegisterUser from "pages/ReusablePages/RegisterUser";
 
 const router = createBrowserRouter([
   {
@@ -55,14 +55,31 @@ const router = createBrowserRouter([
       {
         path: "admin",
         element: (
-          <ProtectedRoute allowedRoles={["admin", "super-admin"]}>
+          <ProtectedRoute allowedRoles={["admin"]}>
             <SAdminDashboardLayout />
           </ProtectedRoute>
         ),
         children: [
-          { index: true, element: <Demo /> },
-          { path: "user-registration", element: <MultiStepForm /> },
+          { index: true, element: <AdminHome /> },
+          { path: "user-registration", element: <RegisterUser /> },
           { path: "leaves", element: <Leaves /> },
+          { path: "user-cards", element: <UserCards /> },
+          { path: "leaves/:id", element: <LeaveDetail /> },
+          { path: "employees-list", element: <EmployeeList /> },
+        ],
+      },
+
+      {
+        path: "super-admin",
+        element: (
+          <ProtectedRoute allowedRoles={["super-admin"]}>
+            <SAdminDashboardLayout />
+          </ProtectedRoute>
+        ),
+        children: [
+          { index: true, element: <SAdminHome /> },
+          { path: "user-registration", element: <MultiStepForm /> },
+          { path: "leaves", element: <LeaveDashboard /> },
           { path: "user-cards", element: <UserCards /> },
           { path: "leaves/:id", element: <LeaveDetail /> },
           { path: "employees-list", element: <EmployeeList /> },
