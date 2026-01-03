@@ -3,8 +3,7 @@ import { FaArrowRight } from "react-icons/fa";
 import { IoIosArrowRoundForward } from "react-icons/io";
 
 export default function Step1({ formData, handleChange, nextStep, errors }) {
-  const feildStyle =
-    "   focus:outline-none  shadow-sm rounded-md px-4 py-2 w-full bg-white border border-neutral-300";
+  const feildStyle = "focus:outline-none  shadow-sm rounded-md px-4 py-2 w-full bg-white border border-neutral-300";
 
   return (
     <div className="p-8 bg-white rounded-2xl border border-neutral-300 flex flex-col font-clash-medium">

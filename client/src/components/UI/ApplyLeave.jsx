@@ -1,14 +1,14 @@
 import React, { useState } from "react";
+import { Dialog } from "primereact/dialog";
+import { Button } from "primereact/button";
 import { useDispatch, useSelector } from "react-redux";
 import { applyLeave } from "@/features/leaves/LeaveSlice";
-import PageHeader from "components/UI/PageHeader";
 
 const ApplyLeave = () => {
   const dispatch = useDispatch();
-
-  const { user } = useSelector((state) => state.auth);
   const { loading, error } = useSelector((state) => state.leave);
 
+  const [visible, setVisible] = useState(false);
   const [formData, setFormData] = useState({
     leaveType: "",
     startDate: "",
@@ -29,7 +29,7 @@ const ApplyLeave = () => {
     const result = await dispatch(applyLeave(formData));
 
     if (applyLeave.fulfilled.match(result)) {
-      alert("Leave applied successfully ✅");
+      setVisible(false);
       setFormData({
         leaveType: "",
         startDate: "",
@@ -39,47 +39,42 @@ const ApplyLeave = () => {
     }
   };
 
-  const feildStyle =
-    "focus:outline-none  shadow-sm rounded-md px-4 py-2 w-full bg-white border border-neutral-300";
+  const fieldStyle =
+    "focus:outline-none rounded-md px-4 py-2 w-full bg-white border border-neutral-300 shadow-sm";
 
   return (
-    <section className="p-4">
-        <PageHeader />
-      <div className=" m-8 p-8 bg-white rounded-2xl shadow-sm border border-neutral-300 flex flex-col font-clash-medium">
-        <h2 className="text-2xl font-semibold mb-8">Apply Leave</h2>
+    <>
+      {/* Trigger Button */}
+      <Button
+        label="Apply Leave"
+        icon="pi pi-plus"
+        onClick={() => setVisible(true)}
+        className="border border-neutral-300 bg-white text-black shadow-sm"
+      />
 
-        <form onSubmit={handleSubmit} className="space-y-4">
-          {/* Name */}
-          <div>
-            <label className="block text-sm font-medium">Name</label>
-            <input
-              type="text"
-              value={user?.name || ""}
-              disabled
-              className={`${feildStyle}`}
-            />
-          </div>
-
-          {/* Employee ID */}
-          <div>
-            <label className="block text-sm font-medium">Employee ID</label>
-            <input
-              type="text"
-              value={user?.empId || ""}
-              disabled
-              className={`${feildStyle}`}
-            />
-          </div>
-
+      {/* Modal */}
+      <Dialog
+        header="Apply Leave"
+        visible={visible}
+        onHide={() => setVisible(false)}
+        style={{ width: "45vw" }}
+        modal
+        draggable={false}
+        className="backdrop-blur-md"
+        contentClassName="border border-neutral-300 rounded-xl shadow-xl bg-white"
+      >
+        <form onSubmit={handleSubmit} className="space-y-4 p-2">
           {/* Leave Type */}
           <div>
-            <label className="block text-sm font-medium">Leave Type</label>
+            <label className="block text-sm font-medium mb-1">
+              Leave Type
+            </label>
             <select
               name="leaveType"
               value={formData.leaveType}
               onChange={handleChange}
               required
-              className={`${feildStyle}`}
+              className={fieldStyle}
             >
               <option value="">Select Leave Type</option>
               <option value="Sick">Sick</option>
@@ -91,61 +86,69 @@ const ApplyLeave = () => {
 
           {/* Start Date */}
           <div>
-            <label className="block text-sm font-medium">Start Date</label>
+            <label className="block text-sm font-medium mb-1">
+              Start Date
+            </label>
             <input
               type="date"
               name="startDate"
               value={formData.startDate}
               onChange={handleChange}
               required
-              className={`${feildStyle}`}
+              className={fieldStyle}
             />
           </div>
 
           {/* End Date */}
           <div>
-            <label className="block text-sm font-medium">End Date</label>
+            <label className="block text-sm font-medium mb-1">
+              End Date
+            </label>
             <input
               type="date"
               name="endDate"
               value={formData.endDate}
               onChange={handleChange}
               required
-              className={`${feildStyle}`}
+              className={fieldStyle}
             />
           </div>
 
           {/* Reason */}
           <div>
-            <label className="block text-sm font-medium">Reason</label>
+            <label className="block text-sm font-medium mb-1">
+              Reason
+            </label>
             <textarea
               name="reason"
+              rows="3"
               value={formData.reason}
               onChange={handleChange}
               required
-              rows="3"
-              className={`${feildStyle}`}
+              className={fieldStyle}
             />
           </div>
 
           {error && (
-            <p className="text-red-500 text-sm">
+            <p className="text-sm text-red-500">
               {error.message || "Something went wrong"}
             </p>
           )}
 
-          <button
-            type="submit"
-            disabled={loading}
-            className="group flex items-center gap-2 px-6 py-2 rounded-md border-2 border-neutral-300
-                        bg-white shadow-sm transition-all duration-300 ease-in-out
-                        hover:shadow-md hover:-translate-y-[1px]"
-          >
-            {loading ? "Applying..." : "Apply Leave"}
-          </button>
+          {/* Submit */}
+          <div className="flex justify-end pt-2">
+            <button
+              type="submit"
+              disabled={loading}
+              className="px-6 py-2 rounded-md border border-neutral-300 bg-white shadow-sm
+                         transition-all hover:shadow-md hover:-translate-y-[1px]"
+            >
+              {loading ? "Applying..." : "Apply Leave"}
+            </button>
+          </div>
         </form>
-      </div>
-    </section>
+      </Dialog>
+    </>
   );
 };
 
