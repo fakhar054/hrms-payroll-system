@@ -51,3 +51,26 @@ export const showLeaves = async (req, res) => {
     res.status(500).json({ success: false, message: "Server Error" });
   }
 };
+
+export const updateLeaveStatus = async (req, res) => {
+  try {
+    const { status, comment } = req.body;
+    const leaveId = req.params.id;
+    const leave = await LeaveModel.findById(leaveId);
+
+    if (!leave) {
+      return res.status(404).json({ message: "Leave not found" });
+    }
+
+    leave.status = status;
+    leave.comment = comment || "";
+
+    await leave.save();
+    res.json({
+      message: `Leave ${status} successfully`,
+      leave,
+    });
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+};
