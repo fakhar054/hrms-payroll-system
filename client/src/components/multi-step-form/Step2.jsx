@@ -2,7 +2,7 @@ import React from "react";
 import { IoIosArrowRoundForward } from "react-icons/io";
 import { IoIosArrowRoundBack } from "react-icons/io";
 
-export default function Step1({ formData, handleChange, nextStep, prevStep }) {
+export default function Step2({ formData, handleChange, nextStep, prevStep, errors }) {
 
   const feildStyle = "   focus:outline-none  shadow-sm rounded-md px-4 py-2 w-full bg-white border border-neutral-300"
 
@@ -32,6 +32,9 @@ export default function Step1({ formData, handleChange, nextStep, prevStep }) {
             value={formData.department}
             className={`${feildStyle}`}
           />
+          {errors.department && (
+            <p className="text-red-500 text-xs mt-1">{errors.department}</p>
+          )}
         </div>
 
         <div>
@@ -50,6 +53,9 @@ export default function Step1({ formData, handleChange, nextStep, prevStep }) {
             <option value="admin">admin</option>
             <option value="super-admin">super-admin</option>
           </select>
+          {errors.userType && (
+            <p className="text-red-500 text-xs mt-1">{errors.userType}</p>
+          )}
         </div>
 
        
@@ -67,6 +73,9 @@ export default function Step1({ formData, handleChange, nextStep, prevStep }) {
             value={formData.jobTitle}
             className={`${feildStyle}`}
           />
+          {errors.jobTitle && (
+            <p className="text-red-500 text-xs mt-1">{errors.jobTitle}</p>
+          )}
         </div>
 
         
@@ -87,6 +96,9 @@ export default function Step1({ formData, handleChange, nextStep, prevStep }) {
             value={formData.basicSalary}
             className={`${feildStyle}`}
           />
+          {errors.basicSalary && (
+            <p className="text-red-500 text-xs mt-1">{errors.basicSalary}</p>
+          )}
         </div>
 
         <div>
@@ -105,6 +117,9 @@ export default function Step1({ formData, handleChange, nextStep, prevStep }) {
             value={formData.otherAllowance}
             className={`${feildStyle}`}
           />
+          {errors.otherAllowance && (
+            <p className="text-red-500 text-xs mt-1">{errors.otherAllowance}</p>
+          )}
         </div>
 
         <div>
@@ -120,6 +135,9 @@ export default function Step1({ formData, handleChange, nextStep, prevStep }) {
             value={formData.netSalary}
             className={`${feildStyle}`}
           />
+          {errors.netSalary && (
+            <p className="text-red-500 text-xs mt-1">{errors.netSalary}</p>
+          )}
         </div>
         
       </div>

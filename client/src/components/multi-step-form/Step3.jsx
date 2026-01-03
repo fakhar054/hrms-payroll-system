@@ -2,7 +2,7 @@ import React from "react";
 import { IoIosArrowRoundForward } from "react-icons/io";
 import { IoIosArrowRoundBack } from "react-icons/io";
 
-export default function Step1({ formData, handleChange, nextStep, prevStep }) {
+export default function Step1({ formData, handleChange, nextStep, prevStep, errors }) {
 
   const feildStyle = "   focus:outline-none  shadow-sm rounded-md px-4 py-2 w-full bg-white border border-neutral-300"
 
@@ -29,6 +29,9 @@ export default function Step1({ formData, handleChange, nextStep, prevStep }) {
             value={formData.accountTitle}
             className={`${feildStyle}`}
           />
+          {errors.accountTitle && (
+            <p className="text-red-500 text-xs mt-1">{errors.accountTitle}</p>
+          )}
         </div>
 
         <div>
@@ -47,6 +50,9 @@ export default function Step1({ formData, handleChange, nextStep, prevStep }) {
             value={formData.accountNumber}
            className={`${feildStyle}`}
           />
+          {errors.accountNumber && (
+            <p className="text-red-500 text-xs mt-1">{errors.accountNumber}</p>
+          )}
         </div>
 
         <div>
@@ -62,21 +68,27 @@ export default function Step1({ formData, handleChange, nextStep, prevStep }) {
             value={formData.bankName}
            className={`${feildStyle}`}
           />
+          {errors.bankName && (
+            <p className="text-red-500 text-xs mt-1">{errors.bankName}</p>
+          )}
         </div>
 
         <div>
           <label className="block text-sm font-medium mb-1" htmlFor="branch">
-            Branch
+            Branch Name
           </label>
           <input
             type="text"
-            name="branch"
-            id="branch"
+            name="branchName"
+            id="branchName"
             placeholder="Branch"
             onChange={handleChange}
-            value={formData.branch}
+            value={formData.branchName}
             className={`${feildStyle}`}
           />
+          {errors.branchName && (
+            <p className="text-red-500 text-xs mt-1">{errors.branchName}</p>
+          )}
        </div>
         
         

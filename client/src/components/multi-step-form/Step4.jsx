@@ -4,7 +4,7 @@ import { IoIosArrowRoundForward } from "react-icons/io";
 import { IoIosArrowRoundBack } from "react-icons/io";
 import { IoMdSend } from "react-icons/io";
 
-export default function Step1({ formData, handleChange, nextStep, prevStep }) {
+export default function Step1({ formData, handleChange, prevStep, errors }) {
 
   const feildStyle = "   focus:outline-none  shadow-sm rounded-md px-4 py-2 w-full bg-white border border-neutral-300"
 
@@ -31,6 +31,9 @@ export default function Step1({ formData, handleChange, nextStep, prevStep }) {
             value={formData.contactPersonName}
             className={`${feildStyle}`}
           />
+          {errors.contactPersonName && (
+            <p className="text-red-500 text-xs mt-1">{errors.contactPersonName}</p>
+          )}
         </div>
 
         <div>
@@ -49,6 +52,9 @@ export default function Step1({ formData, handleChange, nextStep, prevStep }) {
             value={formData.homeAddress}
             className={`${feildStyle}`}
           />
+          {errors.homeAddress && (
+            <p className="text-red-500 text-xs mt-1">{errors.homeAddress}</p>
+          )}
         </div>
 
         <div>
@@ -67,6 +73,9 @@ export default function Step1({ formData, handleChange, nextStep, prevStep }) {
             value={formData.mobileNumber}
             className={`${feildStyle}`}
           />
+          {errors.mobileNumber && (
+            <p className="text-red-500 text-xs mt-1">{errors.mobileNumber}</p>
+          )}
         </div>
 
         <div>
@@ -85,6 +94,9 @@ export default function Step1({ formData, handleChange, nextStep, prevStep }) {
             value={formData.relationship}
             className={`${feildStyle}`}
           />
+          {errors.relationship && (
+            <p className="text-red-500 text-xs mt-1">{errors.relationship}</p>
+          )}
         </div>
 
         <div>
@@ -103,6 +115,9 @@ export default function Step1({ formData, handleChange, nextStep, prevStep }) {
             value={formData.alternativeNumber}
             className={`${feildStyle}`}
           />
+          {errors.alternativeNumber && (
+            <p className="text-red-500 text-xs mt-1">{errors.alternativeNumber}</p>
+          )}
         </div>
         
         
