@@ -130,4 +130,28 @@ export const getAllusers = async (req, res) => {
   }
 };
 
+export const deletUser = async (req, res) => {
+  try {
+    const userId = req.params.id;
+    const user = await UserModel.findById(userId);
+    if (!user) {
+      res.status(401).json({ message: "User not Found" });
+    }
+    if (!user.isActive) {
+      return res.status(400).json({ message: "User already deactivated" });
+    }
+    user.isActive = false;
+    await user.save();
+    return res.status(200).json({
+      message: "User deactivated successfully",
+      user,
+    });
+  } catch (error) {
+    return res.status(500).json({
+      message: "Server error",
+      error: error.message,
+    });
+  }
+};
+
 export const forgotPassword = async (req, res) => {};
