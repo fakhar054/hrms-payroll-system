@@ -52,6 +52,7 @@ export default function Step2({
             value={formData.userType}
             className={`${feildStyle}`}
           >
+            
             <option value="employee">employee</option>
             <option value="admin">admin</option>
             <option value="super-admin">super-admin</option>

@@ -149,7 +149,7 @@ export default function Step1({ formData, handleChange, nextStep, errors }) {
             <p className="text-red-500 text-xs mt-1">{errors.currentAddress}</p>
           )}
         </div>
-
+       
         <div>
           <label
             className="block text-sm font-medium mb-1"
