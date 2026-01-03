@@ -9,6 +9,7 @@ import { registerUser } from "../../features/auth/authThunks";
 import { Navigate, useNavigate } from "react-router";
 
 export default function MultiStepForm() {
+  ///i am latest multistep form working correclty
   const [step, setStep] = useState(1);
   const [errors, setErrors] = useState({});
 
