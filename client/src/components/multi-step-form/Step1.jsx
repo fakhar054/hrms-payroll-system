@@ -148,7 +148,7 @@ export default function Step1({ formData, handleChange, nextStep, errors }) {
             <p className="text-red-500 text-xs mt-1">{errors.currentAddress}</p>
           )}
         </div>
-        <div>
+        {/* <div>
           <label
             className="block text-sm font-medium mb-1"
             htmlFor="address"
@@ -167,7 +167,7 @@ export default function Step1({ formData, handleChange, nextStep, errors }) {
           {errors.address && (
             <p className="text-red-500 text-xs mt-1">{errors.address}</p>
           )}
-        </div>
+        </div> */}
         <div>
           <label
             className="block text-sm font-medium mb-1"

@@ -101,8 +101,8 @@ export default function MultiStepForm() {
 
   
 
-  if (!formData.currentAddress)
-    newErrors.address = "Required";
+  // if (!formData.currentAddress)
+  //   newErrors.address = "Required";
 
   if (!formData.currentAddress)
     newErrors.currentAddress = "Required";
