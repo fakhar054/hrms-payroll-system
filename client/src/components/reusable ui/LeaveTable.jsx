@@ -21,7 +21,6 @@ export default function LeavesList() {
   return (
     <div className="w-full min-h-screen p-4 md:p-8">
       <div className="max-w-7xl mx-auto border border-neutral-200 bg-white rounded-2xl shadow-sm p-6">
-
         {/* HEADER */}
         <div className="flex items-center justify-between mb-6">
           <h1 className="text-2xl font-clash-bold text-gray-800">
@@ -74,9 +73,7 @@ export default function LeavesList() {
                     </td>
 
                     {/* JOB ROLE (STATIC) */}
-                    <td className="py-3 px-4">
-                      Software Engineer
-                    </td>
+                    <td className="py-3 px-4">Software Engineer</td>
 
                     {/* JOINING DATE */}
                     <td className="py-3 px-4 text-gray-600">

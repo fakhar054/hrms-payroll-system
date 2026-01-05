@@ -64,8 +64,8 @@ const router = createBrowserRouter([
         children: [
           { index: true, element: <AdminHome /> },
           { path: "user-registration", element: <RegisterUser /> },
-          { path: "leaves", element: <UserLeaves /> },
-          // { path: "leaves", element: <Leaves /> },
+          // { path: "leaves", element: <UserLeaves /> },
+          { path: "leaves", element: <Leaves /> },
           { path: "user-cards", element: <UserCards /> },
           { path: "leaves/:id", element: <LeaveDetail /> },
           { path: "employees-list", element: <EmployeeList /> },
