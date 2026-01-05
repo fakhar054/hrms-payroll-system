@@ -1,5 +1,5 @@
 import MultiStepForm from 'components/multi-step-form/MultiStepForm'
-import PageHeader from 'components/UI/PageHeader'
+import PageHeader from 'components/reusable ui/PageHeader'
 import React from 'react'
 
 function RegisterUser() {

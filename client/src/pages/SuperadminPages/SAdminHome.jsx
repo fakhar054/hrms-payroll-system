@@ -12,7 +12,7 @@ import {
   ResponsiveContainer,
   CartesianGrid,
 } from "recharts";
-import PageHeader from "components/UI/PageHeader";
+import PageHeader from "components/reusable ui/PageHeader";
 
 function SAdminHome() {
   // 🔒 Hardcoded data

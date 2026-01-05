@@ -1,7 +1,7 @@
 import React from "react";
 import { LuUsers } from "react-icons/lu";
 import { FiUserCheck, FiUserX } from "react-icons/fi";
-import LeaveTable from "components/UI/LeaveTable";
+import LeaveTable from "components/reusable ui/LeaveTable";
 
 function Leaves() {
   
