@@ -19,15 +19,13 @@ export default function EmployeeList() {
   const { users, loading, error } = useSelector((state) => state.users);
 
   useEffect(() => {
-    const fetchUsers = async () => {
-      const resultAction = await dispatch(getAllUsers());
-    };
-    fetchUsers();
-  }, [dispatch]);
+    const timer = setTimeout(() => {
+      dispatch(getAllUsers(search));
+    }, 400);
+    console.log("valie in search", search);
 
-  useEffect(() => {
-    console.log("All users:", users);
-  }, [users]);
+    return () => clearTimeout(timer);
+  }, [search, dispatch]);
 
   return (
     <div className="w-full min-h-screen bg-white p-4 md:p-4">
@@ -101,7 +99,9 @@ export default function EmployeeList() {
                   <td className="py-3 px-4 text-gray-600">
                     {emp.personalInfo.email}
                   </td>
-                  <td className="py-3 px-4">{emp.jobRole || "Not added"}</td>
+                  <td className="py-3 px-4">
+                    {emp.personalInfo.jobRole || "Not added"}
+                  </td>
                   <td className="py-3 px-4">
                     <StatusBadge
                       status={emp.isActive ? "Active" : "Un-Active"}
