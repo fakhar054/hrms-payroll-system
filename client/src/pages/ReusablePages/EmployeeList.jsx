@@ -23,9 +23,9 @@ export default function EmployeeList() {
     fetchUsers();
   }, [dispatch]);
 
-  // useEffect(() => {
-  //   console.log("All users:", users);
-  // }, [users]);
+  useEffect(() => {
+    console.log("All users:", users);
+  }, [users]);
 
   return (
     <div className="w-full min-h-screen bg-white p-4 md:p-4">
@@ -93,7 +93,7 @@ export default function EmployeeList() {
                   className="border-b border-neutral-300 text-sm hover:bg-gray-50 transition"
                 >
                   <td className="py-3 px-4 font-medium text-gray-700">
-                    {emp.id || "EMP-000"}
+                    {emp.personalInfo.empId || "EMP-000"}
                   </td>
                   <td className="py-3 px-4">{emp.personalInfo.fullName}</td>
                   <td className="py-3 px-4 text-gray-600">

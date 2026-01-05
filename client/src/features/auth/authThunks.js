@@ -1,19 +1,36 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
-import { loginApi, logoutApi,registerApi } from "./authAPI";
+import { loginApi, logoutApi, registerApi } from "./authAPI";
 import axios from "axios";
 
 axios.defaults.withCredentials = true;
 const BASE_URL = import.meta.env.VITE_API_URL;
+
+// export const loginUser = createAsyncThunk(
+//   "auth/loginUser",
+//   async (credentials, { rejectWithValue }) => {
+//     try {
+//       const response = await loginApi(credentials);
+//       console.log("Login response:", response.data);
+//       return response.data;
+//     } catch (error) {
+//       return rejectWithValue(error.response.data);
+//     }
+//   }
+// );
 
 export const loginUser = createAsyncThunk(
   "auth/loginUser",
   async (credentials, { rejectWithValue }) => {
     try {
       const response = await loginApi(credentials);
-      console.log("Login response:", response.data);
+
+      if (!response.data.success) {
+        return rejectWithValue(response.data.message);
+      }
+
       return response.data;
     } catch (error) {
-      return rejectWithValue(error.response.data);
+      return rejectWithValue(error.response?.data?.message || "Login failed");
     }
   }
 );

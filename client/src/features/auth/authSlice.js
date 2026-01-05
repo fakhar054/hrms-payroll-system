@@ -17,14 +17,30 @@ const authSlice = createSlice({
         state.loading = true;
         state.error = null;
       })
+
+      // .addCase(loginUser.fulfilled, (state, action) => {
+      //   state.loading = false;
+      //   state.user = action.payload.user;
+      //   state.role = action.payload.user.role;
+      // })
+
       .addCase(loginUser.fulfilled, (state, action) => {
         state.loading = false;
         state.user = action.payload.user;
         state.role = action.payload.user.role;
+        state.isAuthenticated = true;
       })
+
+      // .addCase(loginUser.rejected, (state, action) => {
+      //   state.loading = false;
+      //   state.error = action.payload?.message || "Login failed";
+      // })
       .addCase(loginUser.rejected, (state, action) => {
         state.loading = false;
-        state.error = action.payload?.message || "Login failed";
+        state.user = null;
+        state.role = null;
+        state.isAuthenticated = false;
+        state.error = action.payload || "Login failed";
       })
 
       // GET ME
