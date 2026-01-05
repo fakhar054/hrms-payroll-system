@@ -114,7 +114,7 @@ export default function MultiStepForm() {
     if (currentStep === 2) {
       if (!formData.department) newErrors.department = "Required";
       if (!formData.userType) newErrors.userType = "Required";
-      if (!formData.jobTitle) newErrors.jobTitle = "Required";
+      if (!formData.jobRole) newErrors.jobRole = "Required";
       if (!onlyNumber.test(formData.basicSalary))
         newErrors.basicSalary = "Numbers only";
       if (!onlyNumber.test(formData.otherAllowance))
