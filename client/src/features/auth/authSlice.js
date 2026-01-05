@@ -3,7 +3,7 @@ import { loginUser, registerUser, logoutUser, getMe } from "./authThunks";
 
 const initialState = {
   user: null,
-  loading: false,
+  loading: true,
   error: null,
 };
 
@@ -18,12 +18,6 @@ const authSlice = createSlice({
         state.error = null;
       })
 
-      // .addCase(loginUser.fulfilled, (state, action) => {
-      //   state.loading = false;
-      //   state.user = action.payload.user;
-      //   state.role = action.payload.user.role;
-      // })
-
       .addCase(loginUser.fulfilled, (state, action) => {
         state.loading = false;
         state.user = action.payload.user;
@@ -31,10 +25,6 @@ const authSlice = createSlice({
         state.isAuthenticated = true;
       })
 
-      // .addCase(loginUser.rejected, (state, action) => {
-      //   state.loading = false;
-      //   state.error = action.payload?.message || "Login failed";
-      // })
       .addCase(loginUser.rejected, (state, action) => {
         state.loading = false;
         state.user = null;
