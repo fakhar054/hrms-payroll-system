@@ -3,7 +3,27 @@ import axios from "axios";
 
 const BASE_URL = import.meta.env.VITE_API_URL;
 
-/* ---- API CALL ---- */
+
+export const applyLeave = createAsyncThunk(
+  "leave/applyLeave",
+  async (leaveData, { rejectWithValue }) => {
+    try {
+      const res = await axios.post(
+        "http://localhost:3000/api/leave/leaveapply",
+        leaveData,
+        { withCredentials: true } // IMPORTANT if using cookies/JWT
+      );
+
+      return res.data;
+    } catch (error) {
+      return rejectWithValue(
+        error.response?.data || { message: "Leave apply failed" }
+      );
+    }
+  }
+);
+
+
 export const getAllLeaves = createAsyncThunk(
   "leave/getAllLeaves",
   async () => {
@@ -15,7 +35,7 @@ export const getAllLeaves = createAsyncThunk(
   }
 );
 
-/* ---- SLICE ---- */
+
 const leaveSlice = createSlice({
   name: "leave",
   initialState: {
@@ -41,4 +61,6 @@ const leaveSlice = createSlice({
   },
 });
 
+
+export const { resetLeaveState } = leaveSlice.actions;
 export default leaveSlice.reducer;

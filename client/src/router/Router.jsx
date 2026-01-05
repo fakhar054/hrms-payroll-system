@@ -29,6 +29,8 @@ import LeaveDetail from "pages/ReusablePages/LeaveDetail";
 import Root from "../layouts/Root";
 import LeaveDashboard from "pages/ReusablePages/LeaveDashboard";
 import RegisterUser from "pages/ReusablePages/RegisterUser";
+import ApplyLeave from "pages/UserPages/ApplyLeave";
+import UserLeaves from "pages/UserPages/UserLeaves";
 
 const router = createBrowserRouter([
   {
@@ -62,7 +64,7 @@ const router = createBrowserRouter([
         children: [
           { index: true, element: <AdminHome /> },
           { path: "user-registration", element: <RegisterUser /> },
-          { path: "leaves", element: <Leaves /> },
+          { path: "leaves", element: <UserLeaves /> },
           { path: "user-cards", element: <UserCards /> },
           { path: "leaves/:id", element: <LeaveDetail /> },
           { path: "employees-list", element: <EmployeeList /> },
