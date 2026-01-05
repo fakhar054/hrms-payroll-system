@@ -27,6 +27,7 @@ const LeaveSchema = new mongoose.Schema(
     comment: {
       type: String,
     },
+
     status: {
       type: String,
       enum: ["pending", "approved", "rejected"],

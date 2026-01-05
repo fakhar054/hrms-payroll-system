@@ -26,6 +26,7 @@ export const registerUser = async (req, res) => {
         education: data.education,
         workExperience: data.workExperience,
         empId: data.empId,
+        jobRole: data.jobRole,
       },
 
       bankInfo: {
@@ -114,8 +115,16 @@ export const logout = async (req, res) => {
 };
 
 export const getAllusers = async (req, res) => {
+  const { search } = req.query;
+  console.log("EMP ID: ", search);
   try {
-    const users = await UserModel.find().select("-password");
+    let query = {};
+    if (search && search.trim() !== "") {
+      const searchRegex = new RegExp(search.trim(), "i");
+      query = { "personalInfo.empId": { $regex: searchRegex } };
+    }
+
+    const users = await UserModel.find(query).select("-password");
     res.status(200).json({
       status: true,
       count: users.length,
@@ -129,6 +138,23 @@ export const getAllusers = async (req, res) => {
     });
   }
 };
+
+// export const getAllusers = async (req, res) => {
+//   try {
+//     const users = await UserModel.find().select("-password");
+//     res.status(200).json({
+//       status: true,
+//       count: users.length,
+//       data: users,
+//     });
+//   } catch (error) {
+//     res.status(500).json({
+//       success: false,
+//       message: "Failed to fetch users",
+//       error: error.message,
+//     });
+//   }
+// };
 
 export const deletUser = async (req, res) => {
   try {

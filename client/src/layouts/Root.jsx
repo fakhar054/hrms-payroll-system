@@ -19,9 +19,9 @@ export default function Root() {
     );
   }
 
-  if (error) {
-    return <h1>Failied root</h1>;
-  }
+  // if (error) {
+  //   return <h1>Failied root</h1>;
+  // }
 
   return <Outlet />;
 }

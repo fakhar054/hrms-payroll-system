@@ -9,6 +9,9 @@ const UserModel = new mongoose.Schema(
         required: true,
         trim: true,
       },
+      jobRole: {
+        type: String,
+      },
       empId: {
         type: String,
       },
