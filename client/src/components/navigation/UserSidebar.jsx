@@ -54,13 +54,13 @@ export default function Sidebar() {
 
       {/* Menu */}
       <nav className="px-3 py-6 space-y-1 font-clash-medium text-white">
-        <NavLink to="/admin" className={linkBase}>
+        <NavLink to="/employee" className={linkBase}>
           <LuLayoutDashboard size={18} />
           {!collapsed && <span>Dashboard</span>}
         </NavLink>
 
         {/* Employees Dropdown */}
-        <div>
+        {/* <div>
           <button
             onClick={() => toggleMenu("employees")}
             className={`${linkBase} w-full justify-between`}
@@ -84,9 +84,9 @@ export default function Sidebar() {
               </NavLink>
             </div>
           )}
-        </div>
+        </div> */}
 
-        <NavLink to="/leaves" className={linkBase}>
+        <NavLink to="leaves" className={linkBase}>
           <FiBox size={18} />
           {!collapsed && <span>Leaves</span>}
         </NavLink>

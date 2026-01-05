@@ -31,6 +31,7 @@ import LeaveDashboard from "pages/ReusablePages/LeaveDashboard";
 import RegisterUser from "pages/ReusablePages/RegisterUser";
 import ApplyLeave from "pages/UserPages/ApplyLeave";
 import UserLeaves from "pages/UserPages/UserLeaves";
+import EmployeeDetail from "pages/ReusablePages/EmployeeDetail";
 
 const router = createBrowserRouter([
   {
@@ -44,13 +45,18 @@ const router = createBrowserRouter([
 
       // ---------------- USER DASHBOARD ----------------
       {
-        path: "dashboard",
+        path: "employee",
         element: (
           <ProtectedRoute allowedRoles={["employee"]}>
             <UserDashboardLayout />
           </ProtectedRoute>
         ),
-        children: [{ index: true, element: <UserHome /> }],
+        children: [
+          { index: true, element: <UserHome /> },
+          { path: "leaves", element: <UserLeaves /> },
+          { path: "leaves/:id", element: <LeaveDetail /> },
+        ],
+        
       },
 
       // ---------------- ADMIN DASHBOARD ----------------
@@ -64,8 +70,8 @@ const router = createBrowserRouter([
         children: [
           { index: true, element: <AdminHome /> },
           { path: "user-registration", element: <RegisterUser /> },
-          { path: "leaves", element: <UserLeaves /> },
-          // { path: "leaves", element: <Leaves /> },
+          
+          { path: "leaves", element: <Leaves /> },
           { path: "user-cards", element: <UserCards /> },
           { path: "leaves/:id", element: <LeaveDetail /> },
           { path: "employees-list", element: <EmployeeList /> },
