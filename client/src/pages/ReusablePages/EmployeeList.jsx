@@ -9,6 +9,7 @@ import {
 } from "react-icons/fi";
 import { useDispatch, useSelector } from "react-redux";
 import { getAllUsers } from "features/users/userThunk";
+import ActionDropdown from "../../components/reusable ui/ActionDropdown"
 
 export default function EmployeeList() {
   //again push
@@ -107,9 +108,14 @@ export default function EmployeeList() {
                     />
                   </td>
                   <td className="py-3 px-4 text-right">
-                    <button className="p-2 rounded-lg hover:bg-gray-100">
+                    {/* <button className="p-2 rounded-lg hover:bg-gray-100">
                       <MoreVertical className="h-4 w-4 text-gray-500" />
-                    </button>
+                    </button> */}
+                     <ActionDropdown
+                        onEdit={() => openEditModal(leave)}
+                        onDelete={() => deleteLeave(leave._id)}
+                        onReview={() => navigate(`/leaves/${leave._id}`)}
+                       />
                   </td>
                 </tr>
               ))}
@@ -117,11 +123,8 @@ export default function EmployeeList() {
           </table>
         </div>
 
-        {/* MOBILE NOTE */}
-        <p className="text-xs text-gray-400 mt-4">
-          Optimized for tablet & mobile. Actions and filters will be wired with
-          API later.
-        </p>
+        
+        
       </div>
     </div>
   );

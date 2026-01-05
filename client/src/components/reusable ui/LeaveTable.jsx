@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { getAllLeaves } from "../../features/leaves/LeaveSlice";
 import { useEffect, useState } from "react";
 import { FiSearch, FiCommand } from "react-icons/fi";
+import ActionDropdown from "../reusable ui/ActionDropdown"
 
 export default function LeavesList() {
   const navigate = useNavigate();
@@ -94,16 +95,16 @@ export default function LeavesList() {
                       className="py-3 px-4 text-right relative"
                       onClick={(e) => e.stopPropagation()}
                     >
-                      <button
+                      {/* <button
                         onClick={() =>
                           setOpenMenu(openMenu === leave._id ? null : leave._id)
                         }
                         className="p-2 rounded-lg hover:bg-gray-100"
                       >
                         <MoreVertical className="h-4 w-4 text-gray-500" />
-                      </button>
+                      </button> */}
 
-                      {openMenu === leave._id && (
+                      {/* {openMenu === leave._id && (
                         <div className="absolute right-0 mt-2 w-40 bg-white border rounded-xl shadow-lg z-50">
                           <button className="w-full px-4 py-2 text-left text-sm hover:bg-green-50 text-green-600">
                             Approve
@@ -115,7 +116,13 @@ export default function LeavesList() {
                             Review
                           </button>
                         </div>
-                      )}
+                      )} */}
+
+                      <ActionDropdown
+                          onApprove={() => approveLeave(leave._id)}
+                          onReject={() => rejectLeave(leave._id)}
+                          onReview={() => navigate(`/admin/leaves/${leave._id}`)}
+                        />
                     </td>
                   </tr>
                 );

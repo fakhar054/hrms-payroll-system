@@ -14,6 +14,7 @@ import {
 } from "react-icons/fi";
 import { Search, Filter, ArrowUpDown, MoreVertical } from "lucide-react";
 
+
 const UserLeaves = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -87,7 +88,7 @@ const UserLeaves = () => {
             {leaves.map((leave) => (
               <tr
                 key={leave._id}
-                onClick={() => navigate(`/leaves/${leave._id}`)}
+                onClick={() => navigate(`${leave._id}`)}
                 className="border-b border-neutral-300 text-sm hover:bg-gray-50 transition"
               >
                 <td className="py-5 px-4 font-medium text-gray-700">
@@ -96,7 +97,7 @@ const UserLeaves = () => {
 
                 <td className="py-3 px-4">{user?.personalInfo?.fullName}</td>
 
-                <td className="py-3 px-4">{user?.jobTitle || "—"}</td>
+                <td className="py-3 px-4">{user?.jobRole || "—"}</td>
 
                 <td className="py-3 px-4 text-gray-600">
                   {user?.personalInfo?.dateOfJoining

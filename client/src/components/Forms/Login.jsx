@@ -21,7 +21,7 @@ function Login() {
     } else if (user.userType === "super-admin") {
       navigate("/admin");
     } else if (user.userType === "employee") {
-      navigate("/dashboard");
+      navigate("/employee");
     }
   }, [user, navigate]);
 
