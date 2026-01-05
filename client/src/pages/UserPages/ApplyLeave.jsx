@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { applyLeave } from "@/features/leaves/LeaveSlice";
-import PageHeader from "components/UI/PageHeader";
+import PageHeader from "components/reusable ui/PageHeader";
 
 const ApplyLeave = () => {
   const dispatch = useDispatch();

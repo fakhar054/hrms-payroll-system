@@ -63,20 +63,20 @@ export default function Step2({
         </div>
 
         <div>
-          <label className="block text-sm font-medium mb-1" htmlFor="jobTitle">
+          <label className="block text-sm font-medium mb-1" htmlFor="jobRole">
             Job Title
           </label>
           <input
             type="text"
-            name="jobTitle"
-            id="jobTitle"
+            name="jobRole"
+            id="jobRole"
             placeholder="Job Title"
             onChange={handleChange}
-            value={formData.jobTitle}
+            value={formData.jobRole}
             className={`${feildStyle}`}
           />
-          {errors.jobTitle && (
-            <p className="text-red-500 text-xs mt-1">{errors.jobTitle}</p>
+          {errors.jobRole && (
+            <p className="text-red-500 text-xs mt-1">{errors.jobRole}</p>
           )}
         </div>
 
