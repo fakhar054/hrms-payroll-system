@@ -32,6 +32,8 @@ import RegisterUser from "pages/ReusablePages/RegisterUser";
 import ApplyLeave from "pages/UserPages/ApplyLeave";
 import UserLeaves from "pages/UserPages/UserLeaves";
 import EmployeeDetail from "pages/ReusablePages/EmployeeDetail";
+import EditUserForm from "../pages/ReusablePages/EditUserForm";
+
 
 const router = createBrowserRouter([
   {
@@ -69,11 +71,11 @@ const router = createBrowserRouter([
         children: [
           { index: true, element: <AdminHome /> },
           { path: "user-registration", element: <RegisterUser /> },
-
           { path: "leaves", element: <Leaves /> },
           { path: "user-cards", element: <UserCards /> },
           { path: "leaves/:id", element: <LeaveDetail /> },
           { path: "employees-list", element: <EmployeeList /> },
+         
         ],
       },
 
