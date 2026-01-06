@@ -41,7 +41,7 @@ const router = createBrowserRouter([
     children: [
       // ---------------- PUBLIC ----------------
       { index: true, element: <LandingPage /> },
-      { path: "signup", element: <SignupPage /> },
+      { path: "login", element: <SignupPage /> },
 
       // ---------------- USER DASHBOARD ----------------
       {
@@ -56,7 +56,6 @@ const router = createBrowserRouter([
           { path: "leaves", element: <UserLeaves /> },
           { path: "leaves/:id", element: <LeaveDetail /> },
         ],
-        
       },
 
       // ---------------- ADMIN DASHBOARD ----------------
@@ -70,7 +69,7 @@ const router = createBrowserRouter([
         children: [
           { index: true, element: <AdminHome /> },
           { path: "user-registration", element: <RegisterUser /> },
-          
+
           { path: "leaves", element: <Leaves /> },
           { path: "user-cards", element: <UserCards /> },
           { path: "leaves/:id", element: <LeaveDetail /> },

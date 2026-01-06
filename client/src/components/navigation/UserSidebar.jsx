@@ -69,33 +69,6 @@ export default function Sidebar() {
           {!collapsed && <span>Dashboard</span>}
         </NavLink>
 
-        {/* Employees Dropdown */}
-        {/* <div>
-          <button
-            onClick={() => toggleMenu("employees")}
-            className={`${linkBase} w-full justify-between`}
-          >
-            <div className="flex items-center gap-3">
-              <FiUsers size={18} />
-              {!collapsed && <span>Employees</span>}
-            </div>
-            {!collapsed && <FiChevronDown size={16} className={iconStyle} />}
-          </button>
-
-          {!collapsed && open === "employees" && (
-            <div className="ml-9 mt-1 space-y-1">
-              <NavLink to="/user-cards" className={linkBase}>
-                <CiCircleList className="text-[17px]" />
-                List
-              </NavLink>
-              <NavLink to="/user-registration" className={linkBase}>
-                <RiUserAddLine className="text-[17px]" />
-                Add New
-              </NavLink>
-            </div>
-          )}
-        </div> */}
-
         <NavLink to="leaves" className={linkBase}>
           <FiBox size={18} />
           {!collapsed && <span>Leaves</span>}
