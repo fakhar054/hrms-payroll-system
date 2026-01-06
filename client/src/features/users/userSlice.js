@@ -1,9 +1,12 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { getAllUsers } from "./userThunk";
+import { getAllUsers } from "./userThunk";
+
 
 const initialState = {
   users: [],
   selectedUser: null,
+  formMode: "create" | "review" | "edit",
   loading: false,
   error: null,
 };
@@ -18,6 +21,22 @@ const userSlice = createSlice({
     clearUserError: (state) => {
       state.error = null;
     },
+    setSelectedUser: (state, action) => {
+    state.selectedUser = action.payload;
+   },
+
+  setFormMode: (state, action) => {
+    state.formMode = action.payload;
+  },
+
+  clearSelectedUser: (state) => {
+    state.selectedUser = null;
+    state.formMode = "create";
+  },
+
+  clearUserError: (state) => {
+    state.error = null;
+  },
   },
   extraReducers: (builder) => {
     builder
@@ -34,8 +53,9 @@ const userSlice = createSlice({
         state.loading = false;
         state.error = action.payload;
       });
+      
   },
 });
 
-export const { clearSelectedUser, clearUserError } = userSlice.actions;
+export const { clearSelectedUser, clearUserError, setFormMode, setSelectedUser } = userSlice.actions;
 export default userSlice.reducer;

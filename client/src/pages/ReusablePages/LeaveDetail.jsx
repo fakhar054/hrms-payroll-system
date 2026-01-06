@@ -1,5 +1,6 @@
 import { useParams } from "react-router-dom";
 import { useSelector } from "react-redux";
+import PageHeader from "components/reusable ui/PageHeader";
 
 export default function LeaveDetail() {
   const { id } = useParams();
@@ -15,19 +16,13 @@ export default function LeaveDetail() {
   const personalInfo = leave.user?.personalInfo;
 
   return (
-    <div className="w-full min-h-screen bg-white p-4">
+    <div className="w-full min-h-screen bg-white p-8">
       {/* HEADER */}
-      <div className="flex flex-col mb-8">
-        <h1 className="text-[30px] md:text-[2.5vw] font-clash-bold text-black leading-none">
-          Hello <span className="text-orange-600">Admin</span>
-        </h1>
-        <p className="font-clash-medium text-gray-700">
-          Hope you're having a <span>productive</span> day :)
-        </p>
-      </div>
+     
+      <PageHeader/>
 
       {/* DETAILS */}
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-4 font-clash-medium">
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-4 font-clash- mt-8">
         <InfoCard title="Leave ID" value={leave._id} />
         <InfoCard title="Employee ID" value="EMP-XXX" />
         <InfoCard

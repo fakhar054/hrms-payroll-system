@@ -2,20 +2,20 @@ import { useEffect, useState } from "react";
 import { Search, Filter, ArrowUpDown, MoreVertical } from "lucide-react";
 import {
   FiSearch,
-  FiBell,
-  FiMail,
-  FiChevronRight,
   FiCommand,
 } from "react-icons/fi";
 import { useDispatch, useSelector } from "react-redux";
 import { getAllUsers } from "features/users/userThunk";
 import ActionDropdown from "../../components/reusable ui/ActionDropdown"
 
+
 export default function EmployeeList() {
   //again push
   const [search, setSearch] = useState("");
 
-  const dispatch = useDispatch();
+  
+   const dispatch = useDispatch();
+  
   const { users, loading, error } = useSelector((state) => state.users);
 
   useEffect(() => {
@@ -26,6 +26,8 @@ export default function EmployeeList() {
 
     return () => clearTimeout(timer);
   }, [search, dispatch]);
+
+
 
   return (
     <div className="w-full min-h-screen bg-white p-4 md:p-4">
@@ -112,9 +114,9 @@ export default function EmployeeList() {
                       <MoreVertical className="h-4 w-4 text-gray-500" />
                     </button> */}
                      <ActionDropdown
-                        onEdit={() => openEditModal(leave)}
-                        onDelete={() => deleteLeave(leave._id)}
-                        onReview={() => navigate(`/leaves/${leave._id}`)}
+                       onEdit={() => handleEdit(emp)}
+                       onReview={() => handleReview(emp)}
+                       onDelete={() => handleDelete(emp)}
                        />
                   </td>
                 </tr>
