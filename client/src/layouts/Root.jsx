@@ -5,13 +5,13 @@ import { getMe } from "../features/auth/authThunks";
 
 export default function Root() {
   const dispatch = useDispatch();
-  const { loading, error } = useSelector((state) => state.auth);
+  const { loading, error, isInitialized } = useSelector((state) => state.auth);
 
   useEffect(() => {
     dispatch(getMe());
   }, [dispatch]);
 
-  if (loading) {
+  if (!isInitialized) {
     return (
       <div className="text-white text-center mt-10 text-lg">
         Checking session...
@@ -19,8 +19,12 @@ export default function Root() {
     );
   }
 
-  // if (error) {
-  //   return <h1>Failied root</h1>;
+  // if (loading) {
+  //   return (
+  //     <div className="text-white text-center mt-10 text-lg">
+  //       Checking session...
+  //     </div>
+  //   );
   // }
 
   return <Outlet />;

@@ -1,10 +1,7 @@
 import React from "react";
-import { Link } from 'react-router-dom';
+import { Link } from "react-router-dom";
 
 function landingPage() {
-
-  
-
   return (
     <section className="w-full bg-black">
       {/* Navbar */}
@@ -17,32 +14,20 @@ function landingPage() {
           <div className="flex items-center space-x-2">
             <img src="./images/bubble-chart.png" alt="" className="w-10" />
 
-            <h1 className="text-white font-wix2 text-2xl">Presence<span className="text-orange-500">Pro</span></h1>
+            <h1 className="text-white font-wix2 text-2xl">
+              Presence<span className="text-orange-500">Pro</span>
+            </h1>
           </div>
 
-          {/* <div className="flex items-center space-x-[3vw] font-switzer text-white">
-            <a href="/">Pricing</a>
-            <a href="/">Blogs</a>
-            <a href="/">Contact Us</a>
-          </div> */}
-
           <div className="flex justify-center item-center font-switzer text-white">
-           <Link to="/signup" className="flex">
-                <button className="px-4 py-2 bg-transparent hover:bg-white/10 transition duration-200 border-r border-gray-500/50 focus:outline-none">
-                  Sign Up
-                </button>
-            </Link>
-
             <Link to="/login" className="flex">
-                <button className="px-4 py-2 bg-transparent hover:bg-white/10 transition duration-200 focus:outline-none">
-                  Log In
-                </button>
-            </Link> 
+              <button className="px-4 py-2 bg-transparent hover:bg-white/10 transition duration-200 focus:outline-none">
+                Log In
+              </button>
+            </Link>
           </div>
         </div>
       </nav>
-
-      {/* Landing Page */}
 
       <section className="w-full h-screen flex flex-col justify-start  items-center text-white pt-[17vw]  bg-[radial-gradient(circle_500px_at_50%_300px,rgba(6,182,212,0.3),transparent)]">
         <div className="text-center max-w-5xl">
@@ -66,13 +51,17 @@ function landingPage() {
 
           {/* Primary CTAs */}
           <div className="flex justify-center space-x-6 mt-12">
-            <button className="  backdrop-blur-4xl bg-white/4 
-                    border border-white/10 hover:bg-orange-500 text-white font-bold py-3 px-6 rounded-lg shadow-xl transition duration-300 transform hover:scale-[1.03] text-md uppercase focus:outline-none focus:ring-2 focus:ring-purple-500 focus:ring-opacity-50">
+            <button
+              className="  backdrop-blur-4xl bg-white/4 
+                    border border-white/10 hover:bg-orange-500 text-white font-bold py-3 px-6 rounded-lg shadow-xl transition duration-300 transform hover:scale-[1.03] text-md uppercase focus:outline-none focus:ring-2 focus:ring-purple-500 focus:ring-opacity-50"
+            >
               Start Free Today
             </button>
 
-            <button className=" backdrop-blur-4xl bg-white/4 
-                    border border-white/10 text-white hover:bg-gray-800 font-bold py-3 px-6 rounded-lg shadow-xl transition duration-300 transform hover:scale-[1.03] text-lg uppercase focus:outline-none focus:ring-2 focus:ring-white focus:ring-opacity-50">
+            <button
+              className=" backdrop-blur-4xl bg-white/4 
+                    border border-white/10 text-white hover:bg-gray-800 font-bold py-3 px-6 rounded-lg shadow-xl transition duration-300 transform hover:scale-[1.03] text-lg uppercase focus:outline-none focus:ring-2 focus:ring-white focus:ring-opacity-50"
+            >
               Live Demo
             </button>
           </div>
