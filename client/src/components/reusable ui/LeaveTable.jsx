@@ -4,7 +4,9 @@ import { useDispatch, useSelector } from "react-redux";
 import { getAllLeaves } from "../../features/leaves/LeaveSlice";
 import { useEffect, useState } from "react";
 import { FiSearch, FiCommand } from "react-icons/fi";
-import ActionDropdown from "../reusable ui/ActionDropdown"
+import ActionDropdown from "../reusable ui/ActionDropdown";
+import { updateLeaveStatus } from "../../features/leaves/LeaveSlice";
+import { ToastContainer, toast } from "react-toastify";
 
 export default function LeavesList() {
   const navigate = useNavigate();
@@ -18,6 +20,30 @@ export default function LeavesList() {
   }, [dispatch]);
 
   if (loading) return <p>Loading...</p>;
+
+  const approveLeave = async (leaveId) => {
+    try {
+      await dispatch(
+        updateLeaveStatus({ id: leaveId, status: "approved" })
+      ).unwrap();
+      toast.success("Leave Approved");
+    } catch (err) {
+      console.error("Failed to approve leave:", err);
+      toast.error("Failed to approve leave. Please try again.");
+    }
+  };
+
+  const rejectLeave = async (leaveId) => {
+    try {
+      await dispatch(
+        updateLeaveStatus({ id: leaveId, status: "rejected" })
+      ).unwrap();
+      toast.success("Leave Rejected");
+    } catch (err) {
+      console.error("Failed to reject leave:", err);
+      toast.error("Failed to approve leave. Please try again.");
+    }
+  };
 
   return (
     <div className="w-full min-h-screen p-4 md:p-8">
@@ -63,20 +89,16 @@ export default function LeavesList() {
                     onClick={() => navigate(`/admin/leaves/${leave._id}`)}
                     className="border-b text-sm hover:bg-gray-50 transition cursor-pointer"
                   >
-                    {/* EMP ID (STATIC) */}
                     <td className="py-3 px-4 font-medium text-gray-700">
                       EMP-XXX
                     </td>
 
-                    {/* NAME */}
                     <td className="py-3 px-4">
                       {personalInfo?.fullName || "N/A"}
                     </td>
 
-                    {/* JOB ROLE (STATIC) */}
                     <td className="py-3 px-4">Software Engineer</td>
 
-                    {/* JOINING DATE */}
                     <td className="py-3 px-4 text-gray-600">
                       {personalInfo?.dateOfJoining
                         ? new Date(
@@ -90,45 +112,22 @@ export default function LeavesList() {
                       <StatusBadge status={leave.status} />
                     </td>
 
-                    {/* ACTION */}
                     <td
                       className="py-3 px-4 text-right relative"
                       onClick={(e) => e.stopPropagation()}
                     >
-                      {/* <button
-                        onClick={() =>
-                          setOpenMenu(openMenu === leave._id ? null : leave._id)
-                        }
-                        className="p-2 rounded-lg hover:bg-gray-100"
-                      >
-                        <MoreVertical className="h-4 w-4 text-gray-500" />
-                      </button> */}
-
-                      {/* {openMenu === leave._id && (
-                        <div className="absolute right-0 mt-2 w-40 bg-white border rounded-xl shadow-lg z-50">
-                          <button className="w-full px-4 py-2 text-left text-sm hover:bg-green-50 text-green-600">
-                            Approve
-                          </button>
-                          <button className="w-full px-4 py-2 text-left text-sm hover:bg-red-50 text-red-600">
-                            Reject
-                          </button>
-                          <button className="w-full px-4 py-2 text-left text-sm hover:bg-orange-50 text-orange-600">
-                            Review
-                          </button>
-                        </div>
-                      )} */}
-
                       <ActionDropdown
-                          onApprove={() => approveLeave(leave._id)}
-                          onReject={() => rejectLeave(leave._id)}
-                          onReview={() => navigate(`/admin/leaves/${leave._id}`)}
-                        />
+                        onApprove={() => approveLeave(leave._id)}
+                        onReject={() => rejectLeave(leave._id)}
+                        onReview={() => navigate(`/admin/leaves/${leave._id}`)}
+                      />
                     </td>
                   </tr>
                 );
               })}
             </tbody>
           </table>
+          <ToastContainer />
         </div>
 
         <p className="text-xs text-gray-400 mt-4">
