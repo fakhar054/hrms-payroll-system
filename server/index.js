@@ -23,6 +23,7 @@ app.use(
 );
 
 app.use("/api", router);
+
 app.use("/api/leave", leaveRouter);
 
 app.get("/", (req, res) => {

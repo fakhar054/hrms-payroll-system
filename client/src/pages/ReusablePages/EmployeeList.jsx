@@ -1,21 +1,17 @@
 import { useEffect, useState } from "react";
 import { Search, Filter, ArrowUpDown, MoreVertical } from "lucide-react";
-import {
-  FiSearch,
-  FiCommand,
-} from "react-icons/fi";
+import { FiSearch, FiCommand } from "react-icons/fi";
 import { useDispatch, useSelector } from "react-redux";
-import { getAllUsers } from "features/users/userThunk";
-import ActionDropdown from "../../components/reusable ui/ActionDropdown"
-
+import { deleteUser, getAllUsers } from "features/users/userThunk";
+import ActionDropdown from "../../components/reusable ui/ActionDropdown";
+import { Outlet, useNavigate } from "react-router";
 
 export default function EmployeeList() {
-  //again push
+  const navigate = useNavigate();
   const [search, setSearch] = useState("");
 
-  
-   const dispatch = useDispatch();
-  
+  const dispatch = useDispatch();
+
   const { users, loading, error } = useSelector((state) => state.users);
 
   useEffect(() => {
@@ -27,7 +23,27 @@ export default function EmployeeList() {
     return () => clearTimeout(timer);
   }, [search, dispatch]);
 
+  // const handleReview = (emp) => {
+  //   console.log("Review Clicked: ", emp);
+  //   navigate(`/admin/employees-list/${emp._id}`);
+  // };
 
+  // const handleEdit = (emp) => {
+  //   navigate(`/admin/employees-list/${emp._id}`);
+  // };
+
+  const handleReview = (emp) => {
+    navigate(`/admin/employees-list/${emp._id}/view`);
+  };
+
+  const handleEdit = (emp) => {
+    navigate(`/admin/employees-list/${emp._id}/edit`);
+  };
+
+  const handleDelete = (empId) => {
+    console.log("user deleted: ", empId._id);
+    dispatch(deleteUser(empId._id));
+  };
 
   return (
     <div className="w-full min-h-screen bg-white p-4 md:p-4">
@@ -110,23 +126,17 @@ export default function EmployeeList() {
                     />
                   </td>
                   <td className="py-3 px-4 text-right">
-                    {/* <button className="p-2 rounded-lg hover:bg-gray-100">
-                      <MoreVertical className="h-4 w-4 text-gray-500" />
-                    </button> */}
-                     <ActionDropdown
-                       onEdit={() => handleEdit(emp)}
-                       onReview={() => handleReview(emp)}
-                       onDelete={() => handleDelete(emp)}
-                       />
+                    <ActionDropdown
+                      onEdit={() => handleEdit(emp)}
+                      onReview={() => handleReview(emp)}
+                      onDelete={() => handleDelete(emp)}
+                    />
                   </td>
                 </tr>
               ))}
             </tbody>
           </table>
         </div>
-
-        
-        
       </div>
     </div>
   );

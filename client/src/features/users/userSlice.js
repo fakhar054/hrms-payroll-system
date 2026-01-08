@@ -1,7 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { getAllUsers } from "./userThunk";
-
-
+import { deleteUser, getAllUsers, getUserById, updateUser } from "./userThunk";
 
 const initialState = {
   users: [],
@@ -22,21 +20,21 @@ const userSlice = createSlice({
       state.error = null;
     },
     setSelectedUser: (state, action) => {
-    state.selectedUser = action.payload;
-   },
+      state.selectedUser = action.payload;
+    },
 
-  setFormMode: (state, action) => {
-    state.formMode = action.payload;
-  },
+    setFormMode: (state, action) => {
+      state.formMode = action.payload;
+    },
 
-  clearSelectedUser: (state) => {
-    state.selectedUser = null;
-    state.formMode = "create";
-  },
+    clearSelectedUser: (state) => {
+      state.selectedUser = null;
+      state.formMode = "create";
+    },
 
-  clearUserError: (state) => {
-    state.error = null;
-  },
+    clearUserError: (state) => {
+      state.error = null;
+    },
   },
   extraReducers: (builder) => {
     builder
@@ -52,10 +50,64 @@ const userSlice = createSlice({
       .addCase(getAllUsers.rejected, (state, action) => {
         state.loading = false;
         state.error = action.payload;
+      })
+
+      .addCase(deleteUser.pending, (state) => {
+        state.loading = true;
+        state.error = null;
+      })
+      .addCase(deleteUser.fulfilled, (state, action) => {
+        state.loading = false;
+        // Update the user as inactive instead of removing
+        const index = state.users.findIndex(
+          (user) => user.id === action.payload.userId
+        );
+        if (index !== -1) {
+          state.users[index] = { ...state.users[index], isActive: false };
+        }
+      })
+      .addCase(deleteUser.rejected, (state, action) => {
+        state.loading = false;
+        state.error = action.payload;
+      })
+
+      .addCase(getUserById.pending, (state) => {
+        state.loading = true;
+      })
+      .addCase(getUserById.fulfilled, (state, action) => {
+        state.loading = false;
+        state.selectedUser = action.payload.user;
+      })
+      .addCase(getUserById.rejected, (state, action) => {
+        state.loading = false;
+        state.error = action.payload;
+      })
+      .addCase(updateUser.pending, (state) => {
+        state.loading = true;
+      })
+      .addCase(updateUser.fulfilled, (state, action) => {
+        state.loading = false;
+        const updatedUser = action.payload.user;
+
+        const index = state.users.findIndex(
+          (user) => user.id === updatedUser.id
+        );
+        if (index !== -1) {
+          state.users[index] = updatedUser;
+        }
+        state.selectedUser = updatedUser;
+      })
+      .addCase(updateUser.rejected, (state, action) => {
+        state.loading = false;
+        state.error = action.payload;
       });
-      
   },
 });
 
-export const { clearSelectedUser, clearUserError, setFormMode, setSelectedUser } = userSlice.actions;
+export const {
+  clearSelectedUser,
+  clearUserError,
+  setFormMode,
+  setSelectedUser,
+} = userSlice.actions;
 export default userSlice.reducer;

@@ -34,7 +34,6 @@ import UserLeaves from "pages/UserPages/UserLeaves";
 import EmployeeDetail from "pages/ReusablePages/EmployeeDetail";
 import EditUserForm from "../pages/ReusablePages/EditUserForm";
 
-
 const router = createBrowserRouter([
   {
     path: "/",
@@ -75,7 +74,10 @@ const router = createBrowserRouter([
           { path: "user-cards", element: <UserCards /> },
           { path: "leaves/:id", element: <LeaveDetail /> },
           { path: "employees-list", element: <EmployeeList /> },
-         
+          {
+            path: "employees-list/:id/:action",
+            element: <EditUserForm />,
+          },
         ],
       },
 

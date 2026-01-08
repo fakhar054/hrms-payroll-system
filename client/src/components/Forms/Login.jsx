@@ -30,18 +30,6 @@ function Login() {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
-  // const handleSubmit = async (e) => {
-  //   e.preventDefault();
-  //   const resultAction = await dispatch(loginUser(formData));
-  //   if (loginUser.rejected.match(resultAction)) {
-  //     // Show error toast
-  //     toast.error(resultAction.payload || "Login failed");
-  //   } else {
-  //     // Optional: success toast
-  //     toast.success("Login successful!");
-  //   }
-  // };
-
   const handleSubmit = async (e) => {
     e.preventDefault();
 

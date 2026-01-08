@@ -139,29 +139,28 @@ export const getAllusers = async (req, res) => {
   }
 };
 
-// export const getAllusers = async (req, res) => {
-//   try {
-//     const users = await UserModel.find().select("-password");
-//     res.status(200).json({
-//       status: true,
-//       count: users.length,
-//       data: users,
-//     });
-//   } catch (error) {
-//     res.status(500).json({
-//       success: false,
-//       message: "Failed to fetch users",
-//       error: error.message,
-//     });
-//   }
-// };
+export const getUserbyId = async (req, res) => {
+  const { id } = req.params;
+  try {
+    const user = await UserModel.findById(id);
+    if (!user) {
+      res.status(404).json({ message: "User not found" });
+    }
+    res.status(201).json({
+      user,
+    });
+  } catch (error) {
+    console.error("Error fetching user:", error);
+    res.status(500).json({ message: "Server error", error: error.message });
+  }
+};
 
 export const deletUser = async (req, res) => {
   try {
     const userId = req.params.id;
     const user = await UserModel.findById(userId);
     if (!user) {
-      res.status(401).json({ message: "User not Found" });
+      return res.status(404).json({ message: "User not Found" });
     }
     if (!user.isActive) {
       return res.status(400).json({ message: "User already deactivated" });
@@ -180,24 +179,80 @@ export const deletUser = async (req, res) => {
   }
 };
 
+// export const updateUserByAdmin = async (req, res) => {
+//   try {
+//     const userId = req.params.id;
+//     console.log("user id: ", userId);
+
+//     const protectedFields = [
+//       "_id",
+//       "password",
+//       "createdAt",
+//       "updatedAt",
+//       "__v",
+//     ];
+
+//     protectedFields.forEach((field) => delete req.body[field]);
+
+//     const updatedUser = await UserModel.findByIdAndUpdate(
+//       userId,
+//       { $set: req.body },
+//       { new: true }
+//     );
+
+//     if (!updatedUser)
+//       return res.status(404).json({ message: "User not found" });
+
+//     return res.status(200).json({
+//       message: "User updated successfully",
+//       user: updatedUser,
+//     });
+//   } catch (error) {
+//     return res.status(500).json({ message: error.message });
+//   }
+// };
+
 export const updateUserByAdmin = async (req, res) => {
   try {
     const userId = req.params.id;
-    console.log("user id: ", userId);
-
-    const protectedFields = [
-      "_id",
-      "password",
-      "createdAt",
-      "updatedAt",
-      "__v",
-    ];
-
-    protectedFields.forEach((field) => delete req.body[field]);
 
     const updatedUser = await UserModel.findByIdAndUpdate(
       userId,
-      { $set: req.body },
+      {
+        $set: {
+          "personalInfo.fullName": req.body.fullName,
+          "personalInfo.fatherName": req.body.fatherName,
+          "personalInfo.cnic": req.body.cnic,
+          "personalInfo.empId": req.body.empId,
+          "personalInfo.email": req.body.email,
+          "personalInfo.currentAddress": req.body.currentAddress,
+          "personalInfo.permanentAddress": req.body.permanentAddress,
+          "personalInfo.dob": req.body.dob,
+          "personalInfo.phone": req.body.phone,
+          "personalInfo.dateOfJoining": req.body.dateOfJoining,
+          "personalInfo.maritalStatus": req.body.maritalStatus,
+          "personalInfo.religion": req.body.religion,
+          "personalInfo.education": req.body.education,
+          "personalInfo.workExperience": req.body.workExperience,
+
+          "jobInfo.department": req.body.department,
+          "jobInfo.jobRole": req.body.jobRole,
+          "jobInfo.basicSalary": req.body.basicSalary,
+          "jobInfo.otherAllowance": req.body.otherAllowance,
+          "jobInfo.netSalary": req.body.netSalary,
+
+          "bankInfo.accountTitle": req.body.accountTitle,
+          "bankInfo.accountNumber": req.body.accountNumber,
+          "bankInfo.bankName": req.body.bankName,
+          "bankInfo.branchName": req.body.branchName,
+
+          "emergencyContact.contactPersonName": req.body.contactPersonName,
+          "emergencyContact.homeAddress": req.body.homeAddress,
+          "emergencyContact.mobileNumber": req.body.mobileNumber,
+          "emergencyContact.relationship": req.body.relationship,
+          "emergencyContact.alternativeNumber": req.body.alternativeNumber,
+        },
+      },
       { new: true }
     );
 
