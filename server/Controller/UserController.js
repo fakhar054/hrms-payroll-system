@@ -139,29 +139,28 @@ export const getAllusers = async (req, res) => {
   }
 };
 
-// export const getAllusers = async (req, res) => {
-//   try {
-//     const users = await UserModel.find().select("-password");
-//     res.status(200).json({
-//       status: true,
-//       count: users.length,
-//       data: users,
-//     });
-//   } catch (error) {
-//     res.status(500).json({
-//       success: false,
-//       message: "Failed to fetch users",
-//       error: error.message,
-//     });
-//   }
-// };
+export const getUserbyId = async (req, res) => {
+  const { id } = req.params;
+  try {
+    const user = await UserModel.findById(id);
+    if (!user) {
+      res.status(404).json({ message: "User not found" });
+    }
+    res.status(201).json({
+      user,
+    });
+  } catch (error) {
+    console.error("Error fetching user:", error);
+    res.status(500).json({ message: "Server error", error: error.message });
+  }
+};
 
 export const deletUser = async (req, res) => {
   try {
     const userId = req.params.id;
     const user = await UserModel.findById(userId);
     if (!user) {
-      res.status(401).json({ message: "User not Found" });
+      return res.status(404).json({ message: "User not Found" });
     }
     if (!user.isActive) {
       return res.status(400).json({ message: "User already deactivated" });

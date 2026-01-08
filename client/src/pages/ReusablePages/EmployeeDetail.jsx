@@ -1,7 +1,29 @@
+import { getUserById } from "features/users/userThunk";
+import { useEffect } from "react";
+import { useDispatch } from "react-redux";
 import { useParams } from "react-router-dom";
+import { useSelector } from "react-redux";
 
 export default function EmployeeDetail() {
   const { id } = useParams();
+
+  const { selectedUser, loading, error } = useSelector((state) => state.users);
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    console.log("DISPATCHING getUserById with id:", id);
+
+    if (id) {
+      dispatch(getUserById(id));
+    }
+  }, [dispatch, id]);
+
+  useEffect(() => {
+    console.log("selected User: ", selectedUser);
+  }, [selectedUser]);
+
+  if (loading) return <p className="p-8">Loading...</p>;
+  if (error) return <p className="p-8 text-red-500">{error}</p>;
 
   return (
     <div className="p-8 bg-white min-h-screen">

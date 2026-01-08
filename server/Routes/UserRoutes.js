@@ -7,6 +7,7 @@ import {
   getAllusers,
   deletUser,
   updateUserByAdmin,
+  getUserbyId,
 } from "../Controller/UserController.js";
 import getMeMiddleware from "../Middlewares/getMeMiddleware.js";
 
@@ -18,6 +19,7 @@ router.get("/me", getMeMiddleware, getMe);
 router.get("/logout", logout);
 
 router.get("/all-users", getAllusers);
+router.get("/get-userby-id/:id", getUserbyId);
 router.patch("/admin/user/:id/deactivate", deletUser);
 router.patch("/admin/update-users/:id", updateUserByAdmin);
 
