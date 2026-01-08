@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { Navigate, useNavigate } from "react-router";
 import PageHeader from "components/reusable ui/PageHeader";
 import { IoMdSend } from "react-icons/io";
-import {updateUser} from "../../features/auth/authThunks"
+
 
 export default function MultiStepForm() {
   ///i am latest multistep form working correclty

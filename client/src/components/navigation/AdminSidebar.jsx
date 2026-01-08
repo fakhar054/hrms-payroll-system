@@ -29,7 +29,7 @@ export default function Sidebar() {
   const toggleMenu = (key) => setOpen(open === key ? null : key);
 
   const linkBase =
-    "flex items-center gap-3 rounded-xl px-3 py-3 text-[14px] text-white transition hover:backdrop-blur-4xl hover:bg-transparent hover:bg-white/10 hover:text-orange-500";
+    "flex items-center w-full gap-3 rounded-xl px-3 py-3 text-[14px] text-white transition hover:backdrop-blur-4xl hover:bg-transparent hover:bg-white/10 hover:text-orange-500";
 
   const iconStyle = "text-white";
 
