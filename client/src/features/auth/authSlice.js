@@ -1,12 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { loginUser, registerUser, logoutUser, getMe } from "./authThunks";
 
-// const initialState = {
-//   user: null,
-//   loading: true,
-//   error: null,
-// };
-
 const initialState = {
   user: null,
   isAuthenticated: false,
@@ -21,9 +15,7 @@ const authSlice = createSlice({
   reducers: {},
   extraReducers: (builder) => {
     builder
-      .addCase(getMe.pending, (state) => {
-        // We don't set 'loading' to true here to avoid UI flickers elsewhere
-      })
+      .addCase(getMe.pending, (state) => {})
 
       .addCase(getMe.fulfilled, (state, action) => {
         state.isInitialized = true;
@@ -51,39 +43,6 @@ const authSlice = createSlice({
         state.isAuthenticated = false;
         state.error = action.payload || "Login failed";
       });
-
-    // .addCase(loginUser.pending, (state) => {
-    //   state.loading = true;
-    //   state.error = null;
-    // })
-
-    // .addCase(loginUser.fulfilled, (state, action) => {
-    //   state.loading = false;
-    //   state.user = action.payload.user;
-    //   state.role = action.payload.user.role;
-    //   state.isAuthenticated = true;
-    // })
-
-    // .addCase(loginUser.rejected, (state, action) => {
-    //   state.loading = false;
-    //   state.user = null;
-    //   state.role = null;
-    //   state.isAuthenticated = false;
-    //   state.error = action.payload || "Login failed";
-    // })
-
-    // GET ME
-    // .addCase(getMe.pending, (state) => {
-    //   state.loading = true;
-    // })
-    // .addCase(getMe.fulfilled, (state, action) => {
-    //   state.loading = false;
-    //   state.user = action.payload;
-    // })
-    // .addCase(getMe.rejected, (state) => {
-    //   state.loading = false;
-    //   state.user = null;
-    // });
 
     builder
       .addCase(registerUser.pending, (state) => {

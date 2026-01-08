@@ -75,7 +75,7 @@ const router = createBrowserRouter([
           { path: "leaves/:id", element: <LeaveDetail /> },
           { path: "employees-list", element: <EmployeeList /> },
           {
-            path: "employees-list/:id",
+            path: "employees-list/:id/:action",
             element: <EditUserForm />,
           },
         ],

@@ -25,7 +25,7 @@ export const getUserbyIdApi = async (userId) => {
 export const updateUserByAdmin = async (userId, formData) => {
   const url = `${BASE_URL}/api/admin/update-users/${userId}`;
   try {
-    const response = await axios.patch(url, { formData });
+    const response = await axios.patch(url, formData);
     return response.data;
   } catch (error) {
     throw error.response?.data || error.message;

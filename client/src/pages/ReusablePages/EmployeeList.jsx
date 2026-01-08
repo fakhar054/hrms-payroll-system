@@ -23,13 +23,21 @@ export default function EmployeeList() {
     return () => clearTimeout(timer);
   }, [search, dispatch]);
 
+  // const handleReview = (emp) => {
+  //   console.log("Review Clicked: ", emp);
+  //   navigate(`/admin/employees-list/${emp._id}`);
+  // };
+
+  // const handleEdit = (emp) => {
+  //   navigate(`/admin/employees-list/${emp._id}`);
+  // };
+
   const handleReview = (emp) => {
-    console.log("Review Clicked: ", emp);
-    navigate(`/admin/employees-list/${emp._id}`);
+    navigate(`/admin/employees-list/${emp._id}/view`);
   };
 
   const handleEdit = (emp) => {
-    navigate(`/admin/employees-list/${emp._id}`);
+    navigate(`/admin/employees-list/${emp._id}/edit`);
   };
 
   const handleDelete = (empId) => {

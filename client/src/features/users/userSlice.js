@@ -1,5 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { deleteUser, getAllUsers, getUserById } from "./userThunk";
+import { deleteUser, getAllUsers, getUserById, updateUser } from "./userThunk";
 
 const initialState = {
   users: [],
@@ -52,7 +52,6 @@ const userSlice = createSlice({
         state.error = action.payload;
       })
 
-      //for deleteing user
       .addCase(deleteUser.pending, (state) => {
         state.loading = true;
         state.error = null;
@@ -80,6 +79,25 @@ const userSlice = createSlice({
         state.selectedUser = action.payload.user;
       })
       .addCase(getUserById.rejected, (state, action) => {
+        state.loading = false;
+        state.error = action.payload;
+      })
+      .addCase(updateUser.pending, (state) => {
+        state.loading = true;
+      })
+      .addCase(updateUser.fulfilled, (state, action) => {
+        state.loading = false;
+        const updatedUser = action.payload.user;
+
+        const index = state.users.findIndex(
+          (user) => user.id === updatedUser.id
+        );
+        if (index !== -1) {
+          state.users[index] = updatedUser;
+        }
+        state.selectedUser = updatedUser;
+      })
+      .addCase(updateUser.rejected, (state, action) => {
         state.loading = false;
         state.error = action.payload;
       });
