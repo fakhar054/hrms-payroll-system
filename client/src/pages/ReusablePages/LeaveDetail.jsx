@@ -4,7 +4,7 @@ import { useSelector } from "react-redux";
 export default function LeaveDetail() {
   const { id } = useParams();
 
-  const { leaves, loading } = useSelector((state) => state.leave);
+  const { leaves, loading } = useSelector((state) => state.myLeaves);
 
   // Find selected leave
   const leave = leaves?.find((l) => l._id === id);

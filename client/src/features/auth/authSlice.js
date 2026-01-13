@@ -1,8 +1,16 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { loginUser, registerUser, logoutUser, getMe } from "./authThunks";
 
+// const initialState = {
+//   user: null,
+//   loading: true,
+//   error: null,
+// };
+
 const initialState = {
   user: null,
+  isAuthenticated: false,
+  isInitialized: false,
   loading: false,
   error: null,
 };
@@ -13,6 +21,22 @@ const authSlice = createSlice({
   reducers: {},
   extraReducers: (builder) => {
     builder
+      .addCase(getMe.pending, (state) => {
+        // We don't set 'loading' to true here to avoid UI flickers elsewhere
+      })
+
+      .addCase(getMe.fulfilled, (state, action) => {
+        state.isInitialized = true;
+        state.isAuthenticated = true;
+        state.user = action.payload;
+      })
+
+      .addCase(getMe.rejected, (state) => {
+        state.isInitialized = true;
+        state.isAuthenticated = false;
+        state.user = null;
+      })
+
       .addCase(loginUser.pending, (state) => {
         state.loading = true;
         state.error = null;
@@ -20,25 +44,46 @@ const authSlice = createSlice({
       .addCase(loginUser.fulfilled, (state, action) => {
         state.loading = false;
         state.user = action.payload.user;
-        state.role = action.payload.user.role;
+        state.isAuthenticated = true;
       })
       .addCase(loginUser.rejected, (state, action) => {
         state.loading = false;
-        state.error = action.payload?.message || "Login failed";
-      })
-
-      // GET ME
-      .addCase(getMe.pending, (state) => {
-        state.loading = true;
-      })
-      .addCase(getMe.fulfilled, (state, action) => {
-        state.loading = false;
-        state.user = action.payload;
-      })
-      .addCase(getMe.rejected, (state) => {
-        state.loading = false;
-        state.user = null;
+        state.isAuthenticated = false;
+        state.error = action.payload || "Login failed";
       });
+
+    // .addCase(loginUser.pending, (state) => {
+    //   state.loading = true;
+    //   state.error = null;
+    // })
+
+    // .addCase(loginUser.fulfilled, (state, action) => {
+    //   state.loading = false;
+    //   state.user = action.payload.user;
+    //   state.role = action.payload.user.role;
+    //   state.isAuthenticated = true;
+    // })
+
+    // .addCase(loginUser.rejected, (state, action) => {
+    //   state.loading = false;
+    //   state.user = null;
+    //   state.role = null;
+    //   state.isAuthenticated = false;
+    //   state.error = action.payload || "Login failed";
+    // })
+
+    // GET ME
+    // .addCase(getMe.pending, (state) => {
+    //   state.loading = true;
+    // })
+    // .addCase(getMe.fulfilled, (state, action) => {
+    //   state.loading = false;
+    //   state.user = action.payload;
+    // })
+    // .addCase(getMe.rejected, (state) => {
+    //   state.loading = false;
+    //   state.user = null;
+    // });
 
     builder
       .addCase(registerUser.pending, (state) => {

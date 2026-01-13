@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { loginUser } from "features/auth/authThunks";
+import { getMe, loginUser } from "features/auth/authThunks";
 import { useNavigate } from "react-router";
+import { ToastContainer, toast } from "react-toastify";
 
 function Login() {
   const [showPassword, setShowPassword] = useState(false);
@@ -21,7 +22,7 @@ function Login() {
     } else if (user.userType === "super-admin") {
       navigate("/admin");
     } else if (user.userType === "employee") {
-      navigate("/dashboard");
+      navigate("/employee");
     }
   }, [user, navigate]);
 
@@ -29,9 +30,32 @@ function Login() {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
-  const handleSubmit = (e) => {
+  // const handleSubmit = async (e) => {
+  //   e.preventDefault();
+  //   const resultAction = await dispatch(loginUser(formData));
+  //   if (loginUser.rejected.match(resultAction)) {
+  //     // Show error toast
+  //     toast.error(resultAction.payload || "Login failed");
+  //   } else {
+  //     // Optional: success toast
+  //     toast.success("Login successful!");
+  //   }
+  // };
+
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    dispatch(loginUser(formData));
+
+    try {
+      const resultAction = await dispatch(loginUser(formData));
+      if (loginUser.rejected.match(resultAction)) {
+        toast.error(resultAction.payload || "Login failed");
+      } else {
+        toast.success("Login successful!");
+      }
+    } catch (err) {
+      toast.error("Something went wrong. Please try again.");
+      console.error(err);
+    }
   };
 
   return (
@@ -98,6 +122,7 @@ function Login() {
           Login
         </button>
       </form>
+      <ToastContainer />
     </div>
   );
 }

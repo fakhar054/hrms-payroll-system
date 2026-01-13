@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import {
   FiBox,
   FiUsers,
@@ -13,10 +13,15 @@ import { HiOutlineChevronLeft } from "react-icons/hi";
 import { LuLayoutDashboard } from "react-icons/lu";
 import { CiCircleList } from "react-icons/ci";
 import { RiUserAddLine } from "react-icons/ri";
+import { useDispatch } from "react-redux";
+import { logoutUser } from "features/auth/authThunks";
 
 export default function Sidebar() {
   const [collapsed, setCollapsed] = useState(false);
   const [open, setOpen] = useState(null);
+
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   const toggle = () => setCollapsed(!collapsed);
   const toggleMenu = (key) => setOpen(open === key ? null : key);
@@ -25,6 +30,11 @@ export default function Sidebar() {
     "flex items-center gap-3 rounded-xl px-3 py-3 text-[14px] text-white transition hover:backdrop-blur-4xl hover:bg-transparent hover:bg-white/10 hover:text-orange-500";
 
   const iconStyle = "text-white";
+
+  const handleLogout = async () => {
+    await dispatch(logoutUser());
+    navigate("/");
+  };
 
   return (
     <aside
@@ -54,39 +64,12 @@ export default function Sidebar() {
 
       {/* Menu */}
       <nav className="px-3 py-6 space-y-1 font-clash-medium text-white">
-        <NavLink to="/admin" className={linkBase}>
+        <NavLink to="/employee" className={linkBase}>
           <LuLayoutDashboard size={18} />
           {!collapsed && <span>Dashboard</span>}
         </NavLink>
 
-        {/* Employees Dropdown */}
-        <div>
-          <button
-            onClick={() => toggleMenu("employees")}
-            className={`${linkBase} w-full justify-between`}
-          >
-            <div className="flex items-center gap-3">
-              <FiUsers size={18} />
-              {!collapsed && <span>Employees</span>}
-            </div>
-            {!collapsed && <FiChevronDown size={16} className={iconStyle} />}
-          </button>
-
-          {!collapsed && open === "employees" && (
-            <div className="ml-9 mt-1 space-y-1">
-              <NavLink to="/user-cards" className={linkBase}>
-                <CiCircleList className="text-[17px]" />
-                List
-              </NavLink>
-              <NavLink to="/user-registration" className={linkBase}>
-                <RiUserAddLine className="text-[17px]" />
-                Add New
-              </NavLink>
-            </div>
-          )}
-        </div>
-
-        <NavLink to="/leaves" className={linkBase}>
+        <NavLink to="leaves" className={linkBase}>
           <FiBox size={18} />
           {!collapsed && <span>Leaves</span>}
         </NavLink>
@@ -135,7 +118,7 @@ export default function Sidebar() {
           <FiSettings size={18} />
           {!collapsed && <span>Settings</span>}
         </NavLink>
-        <NavLink to="/logout" className={linkBase}>
+        <NavLink className={linkBase} onClick={handleLogout}>
           <FiLogOut size={18} />
           {!collapsed && <span>Logout</span>}
         </NavLink>
