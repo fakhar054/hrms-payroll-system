@@ -11,7 +11,6 @@ export default function EmployeeList() {
   const [search, setSearch] = useState("");
 
   const dispatch = useDispatch();
-
   const { users, loading, error } = useSelector((state) => state.users);
 
   useEffect(() => {
@@ -22,15 +21,6 @@ export default function EmployeeList() {
 
     return () => clearTimeout(timer);
   }, [search, dispatch]);
-
-  // const handleReview = (emp) => {
-  //   console.log("Review Clicked: ", emp);
-  //   navigate(`/admin/employees-list/${emp._id}`);
-  // };
-
-  // const handleEdit = (emp) => {
-  //   navigate(`/admin/employees-list/${emp._id}`);
-  // };
 
   const handleReview = (emp) => {
     navigate(`/admin/employees-list/${emp._id}/view`);

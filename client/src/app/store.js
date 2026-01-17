@@ -3,6 +3,8 @@ import authReducer from "../features/auth/authSlice";
 import userReducer from "../features/users/userSlice";
 import leaveReducer from "../features/leaves/LeaveSlice";
 import myLeavesReducer from "../features/leaves/myLeavesSlice";
+import announcementReducer from "../features/annoucement/annoucementSlice";
+import notifcationReducer from "features/notifications/notifcationSlice";
 
 export const store = configureStore({
   reducer: {
@@ -10,5 +12,7 @@ export const store = configureStore({
     users: userReducer,
     leave: leaveReducer,
     myLeaves: myLeavesReducer,
+    announcements: announcementReducer,
+    notifications: notifcationReducer,
   },
 });

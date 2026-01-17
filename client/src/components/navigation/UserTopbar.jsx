@@ -1,22 +1,30 @@
-import { FiSearch, FiBell, FiMail, FiChevronRight, FiCommand } from "react-icons/fi";
+import {
+  FiSearch,
+  FiBell,
+  FiMail,
+  FiChevronRight,
+  FiCommand,
+} from "react-icons/fi";
 import { LuUserRound } from "react-icons/lu";
-import { Dialog } from 'primereact/dialog';
-import { Button } from 'primereact/button';
-import React, { useState } from "react";
-
-
-
-/**
- * TopBar
- * - Light, minimal styling
- * - Takes remaining width next to sidebar
- * - No functionality yet (UI only)
- */
+import { Dialog } from "primereact/dialog";
+import { Button } from "primereact/button";
+import React, { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { getAllNotifications } from "features/notifications/notificationsThunk";
 
 export default function TopBar() {
-
-
   const [visible, setVisible] = useState(false);
+  const dispatch = useDispatch();
+  const { notifications, loading, error } = useSelector(
+    (state) => state.notifications
+  );
+
+  useEffect(() => {
+    dispatch(getAllNotifications());
+  }, [dispatch]);
+
+  if (loading) return <p>Loading...</p>;
+  console.log("Notifications:", notifications);
 
   return (
     <header className="w-full h-[5rem] bg-white border-b border-neutral-300 flex items-center justify-between px-4 font-clash-medium">
@@ -30,7 +38,6 @@ export default function TopBar() {
         />
         <div className="flex justify-center items-center">
           <FiCommand />
-          
         </div>
       </div>
 
@@ -44,29 +51,36 @@ export default function TopBar() {
         </button>
 
         {/* Profile */}
-         <div className="card flex justify-content-center">
-            <Button  icon="pi pi-external-link" onClick={() => setVisible(true)}>
-              <LuUserRound  className="pb-1 text-[1.6rem]" />
-             <FiChevronRight className="text-black" />
-            </Button>
-            <Dialog className="p-10 bg-black backdrop-blur-2xl bg-black/20 
-                    border border-white/10 text-black font-clash-medium rounded-2xl" header="Header" visible={visible} onHide={() => {if (!visible) return; setVisible(false); }}
-                style={{ width: '50vw' }} breakpoints={{ '960px': '75vw', '641px': '100vw' }}>
-                <img 
-                src="/images/pfp.jpeg" 
-                alt="pfp" 
-                className="w-15 h-15 rounded" />
-            </Dialog>
+        <div className="card flex justify-content-center">
+          <Button icon="pi pi-external-link" onClick={() => setVisible(true)}>
+            <LuUserRound className="pb-1 text-[1.6rem]" />
+            <FiChevronRight className="text-black" />
+          </Button>
+          <Dialog
+            className="p-10 bg-black backdrop-blur-2xl bg-black/20 
+                    border border-white/10 text-black font-clash-medium rounded-2xl"
+            header="Header"
+            visible={visible}
+            onHide={() => {
+              if (!visible) return;
+              setVisible(false);
+            }}
+            style={{ width: "50vw" }}
+            breakpoints={{ "960px": "75vw", "641px": "100vw" }}
+          >
+            <img
+              src="/images/pfp.jpeg"
+              alt="pfp"
+              className="w-15 h-15 rounded"
+            />
+          </Dialog>
         </div>
         {/* <button className="flex items-center  transition-transform duration-300 hover:scale-105 cursor-pointer ">
           
           <LuUserRound  className="pb-1 text-[1.6rem]" />
           <FiChevronRight className="text-black" />
         </button> */}
-        
       </div>
     </header>
   );
 }
-
-

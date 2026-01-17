@@ -33,6 +33,9 @@ import ApplyLeave from "pages/UserPages/ApplyLeave";
 import UserLeaves from "pages/UserPages/UserLeaves";
 import EmployeeDetail from "pages/ReusablePages/EmployeeDetail";
 import EditUserForm from "../pages/ReusablePages/EditUserForm";
+import CreateAnnoucment from "pages/Annoucment/CreateAnnoucment";
+import Annoucment from "pages/Annoucment/Annoucments";
+import DetailAnnoucment from "pages/Annoucment/DetailAnnoucment";
 
 const router = createBrowserRouter([
   {
@@ -56,6 +59,11 @@ const router = createBrowserRouter([
           { index: true, element: <UserHome /> },
           { path: "leaves", element: <UserLeaves /> },
           { path: "leaves/:id", element: <LeaveDetail /> },
+          { path: "annoucment", element: <Annoucment /> },
+          {
+            path: "annoucment/annoucment-details/:id",
+            element: <DetailAnnoucment />,
+          },
         ],
       },
 
@@ -72,6 +80,8 @@ const router = createBrowserRouter([
           { path: "user-registration", element: <RegisterUser /> },
           { path: "leaves", element: <Leaves /> },
           { path: "user-cards", element: <UserCards /> },
+          { path: "create-annoucment", element: <CreateAnnoucment /> },
+
           { path: "leaves/:id", element: <LeaveDetail /> },
           { path: "employees-list", element: <EmployeeList /> },
           {

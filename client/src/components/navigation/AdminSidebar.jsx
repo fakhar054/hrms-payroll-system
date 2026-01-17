@@ -103,10 +103,14 @@ export default function Sidebar() {
           {!collapsed && <span>Leaves</span>}
         </NavLink>
 
-        <NavLink to="/management" className={linkBase}>
+        <NavLink to="create-annoucment" className={linkBase}>
+          <FiCalendar size={18} /> {!collapsed && <span>Annoucement</span>}
+        </NavLink>
+
+        {/* <NavLink to="/management" className={linkBase}>
           <FiCalendar size={18} />
           {!collapsed && <span>Management</span>}
-        </NavLink>
+        </NavLink> */}
 
         {/* Attendance Dropdown */}
         <div>

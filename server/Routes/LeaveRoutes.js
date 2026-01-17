@@ -8,7 +8,6 @@ import {
 import authMiddleware from "../Middlewares/authMiddleware.js";
 
 const leaveRouter = express.Router();
-
 leaveRouter.post("/leaveapply", authMiddleware, applyLeave);
 leaveRouter.get("/my-leaves", authMiddleware, getMyLeaves);
 leaveRouter.get("/admin/all-leaves", showLeaves);

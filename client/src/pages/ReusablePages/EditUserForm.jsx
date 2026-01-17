@@ -16,12 +16,11 @@ export default function MultiStepForm() {
   console.log("id: ", id);
 
   const [mode, setMode] = useState();
-
   const { selectedUser, loading, error } = useSelector((state) => state.users);
 
+  
   useEffect(() => {
     console.log("DISPATCHING getUserById with id:", id);
-
     if (id) {
       dispatch(getUserById({ userId: id }));
     }
