@@ -4,6 +4,7 @@ import dotenv from "dotenv";
 import router from "./Routes/UserRoutes.js";
 import connectDB from "./Config/db.js";
 import leaveRouter from "./Routes/LeaveRoutes.js";
+import annoucementRouter from "./Routes/Annocement.js";
 import cookieParser from "cookie-parser";
 import cors from "cors";
 
@@ -23,8 +24,8 @@ app.use(
 );
 
 app.use("/api", router);
-
 app.use("/api/leave", leaveRouter);
+app.use("/annoucement/api", annoucementRouter);
 
 app.get("/", (req, res) => {
   res.send("Hello, Server is running!");
